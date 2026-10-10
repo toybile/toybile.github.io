@@ -11,9 +11,9 @@ A central menu for browser projects and downloadable software. / Um menu central
 
 **Propositional Logic Editor** is a workspace for writing and evaluating classical propositional arguments. Its features include:
 
-- Editable proposition/connective blocks, premise/conclusion roles, blank rows and uppercase typing.
-- Immediate row dragging, group selection, group dragging/deletion, undo/redo and keyboard navigation.
-- Multiple arguments with rename, delete, tab reordering, and blank/example creation.
+- Editable proposition/connective blocks, premise/conclusion roles, blank rows and uppercase typing with a visibly active Caps Lock icon.
+- Immediate row dragging, 0.2-second hold to enter/exit group selection, group dragging/deletion, undo/redo and keyboard navigation.
+- Multiple arguments with rename, delete, tab reordering, and blank/example creation. An offline Help page explains the current examples and returns to the list with an upper-left arrow.
 - A searchable symbol library, collapsible categories and alternative notations.
 - Independently collapsible editor/preview panels, movable panels and horizontal resizing.
 - Proportional horizontal positioning when the sidebar or viewport changes; separated panels move down/up as the upper panel grows/shrinks, preserving intentional overlaps.
@@ -55,9 +55,9 @@ The LP editor stores its arguments and preferences locally in the browser. The p
 
 O **Propositional Logic Editor** permite escrever e avaliar argumentos proposicionais clássicos. Suas funções incluem:
 
-- Blocos editáveis de proposições/conectivos, funções de premissa/conclusão, linhas em branco e digitação em maiúsculas.
-- Arrasto imediato de linhas, seleção múltipla, arrasto/exclusão em grupo, desfazer/refazer e navegação pelo teclado.
-- Vários argumentos com renomeação, exclusão, reordenação de abas e criação em branco ou por exemplo.
+- Blocos editáveis de proposições/conectivos, funções de premissa/conclusão, linhas em branco e digitação em maiúsculas com ícone de Caps Lock destacado quando ativo.
+- Arrasto imediato de linhas, pressão de 0,2 segundo para entrar/sair da seleção múltipla, arrasto/exclusão em grupo, desfazer/refazer e navegação pelo teclado.
+- Vários argumentos com renomeação, exclusão, reordenação de abas e criação em branco ou por exemplo. Uma página de Ajuda offline explica os exemplos atuais e volta à lista por uma seta no canto superior esquerdo.
 - Biblioteca de símbolos com busca, categorias recolhíveis e notações alternativas.
 - Edição e prévia recolhíveis independentemente, painéis movíveis e alteração horizontal de tamanho.
 - Posição horizontal proporcional ao abrir/fechar o menu lateral ou alterar a tela; painéis separados descem/sobem conforme o superior cresce/diminui, preservando sobreposições escolhidas.
