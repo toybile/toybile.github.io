@@ -9,7 +9,7 @@ A central menu for browser projects and downloadable software. / Um menu central
 
 ## Browser projects
 
-**Propositional Logic Editor** is a workspace for writing and evaluating classical propositional arguments. Its features include:
+**Logic Editor** is a workspace for writing and evaluating classical propositional arguments. Its features include:
 
 - Editable proposition/connective blocks, premise/conclusion roles, blank rows and uppercase typing with a visibly active Caps Lock icon.
 - Immediate row dragging, 0.2-second hold to enter/exit group selection, group dragging/deletion, undo/redo and keyboard navigation.
@@ -39,7 +39,7 @@ Open the portfolio's `index.html` in a modern browser. No dependencies need to b
 | File | Purpose |
 | --- | --- |
 | `index.html` | Main project menu |
-| `lp/index.html` | Embedded view of the standalone Propositional Logic Editor |
+| `lp/index.html` | Embedded view of the standalone Logic Editor |
 | `.nojekyll` | Static GitHub Pages publishing |
 
 GitHub Pages serves the configured publishing source; in the current main-branch/root setup, pushing the updated distribution updates the website.
@@ -53,7 +53,7 @@ The LP editor stores its arguments and preferences locally in the browser. The p
 
 ## Projetos no navegador
 
-O **Propositional Logic Editor** permite escrever e avaliar argumentos proposicionais clássicos. Suas funções incluem:
+O **Logic Editor** permite escrever e avaliar argumentos proposicionais clássicos. Suas funções incluem:
 
 - Blocos editáveis de proposições/conectivos, funções de premissa/conclusão, linhas em branco e digitação em maiúsculas com ícone de Caps Lock destacado quando ativo.
 - Arrasto imediato de linhas, pressão de 0,2 segundo para entrar/sair da seleção múltipla, arrasto/exclusão em grupo, desfazer/refazer e navegação pelo teclado.
@@ -91,3 +91,7 @@ O GitHub Pages usa a origem configurada para publicação; na configuração atu
 O editor LP armazena argumentos e preferências localmente no navegador. O portfólio incorpora o editor independente; ambos usam o mesmo armazenamento do editor quando o navegador permite. Os dados são separados por navegador e origem (protocolo, domínio e porta), não pelo caminho da URL. Transfira argumentos entre ambientes separados pela exportação/importação `.lp.json`. Limpar os dados do site pode remover o trabalho salvo.
 
 </details>
+
+The editor opens directly at /Logic-Editor/ and its Home button returns to this portfolio. /lp/index.html and /Propositional-Logic-Editor/ redirect to the editor without an iframe. Modal notation is supported for writing; automatic validation remains classical propositional logic.
+
+O editor abre diretamente em /Logic-Editor/ e o botão Home volta ao portfólio. /lp/index.html e /Propositional-Logic-Editor/ redirecionam ao editor sem iframe. Símbolos modais estão disponíveis na escrita; a validação automática permanece proposicional clássica.
