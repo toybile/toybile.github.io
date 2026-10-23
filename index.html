@@ -185,7 +185,7 @@ dialog { position: fixed; width: min(620px, calc(100vw - 40px)); max-width: none
 dialog::backdrop { background: var(--backdrop); backdrop-filter: blur(7px); animation: backdrop-in .22s var(--ease) both; }
 dialog.is-closing::backdrop { animation: backdrop-out .16s var(--ease) both; }
 .dialog-panel { position: relative; padding: 36px 32px 28px; }
-.dialog-close { position: absolute; z-index: 1; top: 16px; right: 16px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--border-soft); border-radius: 50%; background: var(--surface-soft); color: var(--muted); font-size: 1.25rem; line-height: 1; transition: color .18s, background-color .18s, transform .18s; }
+.dialog-close { box-sizing:border-box; position: absolute; z-index: 1; top: 16px; right: 16px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--border-soft); border-radius: 50%; background: var(--surface-soft); color: var(--muted); font-size: 1.25rem; line-height: 1; transition: color .18s, background-color .18s, transform .18s; }
 .dialog-close:hover { background: var(--tint); color: var(--accent-ink); transform: rotate(5deg); }
 .dialog-close:active { transform: scale(.94); }
 .dialog-eyebrow { margin: 4px 30px 10px; color: var(--accent-ink); font-size: .64rem; letter-spacing: .12em; line-height: 1.5; font-weight: 750; text-align: center; }
@@ -247,10 +247,10 @@ kbd { font: inherit; font-weight: 650; }
 .hold-icon { position: relative; z-index: 1; display: grid; place-items: center; }
 .hold-icon svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .theme-hold-label { min-width: 32px; font-size: .69rem; line-height: 1; font-weight: 720; white-space: nowrap; }
-.theme-hold-feedback[data-action="themes"] { min-width: 134px; border-color: var(--accent); }
-.theme-hold-feedback[data-action="themes"] .theme-hold-ring { outline: 1px solid var(--border-hover); outline-offset: 3px; background: conic-gradient(var(--accent) var(--hold-progress), var(--border-soft) 0); }
-.theme-hold-feedback[data-action="themes"] .theme-hold-ring::after { content: ""; position: absolute; inset: 5px; border: 1px solid var(--border); border-radius: 50%; }
-.theme-hold-feedback[data-action="themes"] .hold-icon svg { width: 11px; height: 11px; }
+
+
+
+
 .theme-hold-feedback.is-complete .theme-hold-ring { background: var(--accent); }
 .theme-hold-feedback.is-complete .theme-hold-ring::before { background: var(--accent); }
 .theme-hold-feedback.is-complete .hold-icon { color: var(--paper); }
@@ -369,13 +369,36 @@ body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
 @media(max-width:760px){#creation-hub-centered .hub-sketch{width:calc(var(--size)*.72);height:calc(var(--size)*.72);opacity:.23}#creation-hub-centered .hub-sketch[data-wide]{display:none}#creation-hub-centered .hub-sketch:nth-child(3){left:90%}#creation-hub-centered .hub-sketch:nth-child(5){left:5%}#creation-hub-centered .hub-sketch:nth-child(8){left:94%}}
 @media(prefers-reduced-motion:reduce){#creation-hub-centered .hub-sketch :is(path,circle,ellipse){animation:none}}
 @media(forced-colors:active),print{#creation-hub-centered .hub-sketches{display:none}}
-</style><style>#creation-hub-centered #extras-atlas{position:relative}#creation-hub-centered #extras-atlas>.atlas-beta{position:absolute;z-index:1;top:14px;right:14px;display:inline-flex;align-items:center;justify-content:center;min-height:24px;padding:3px 9px;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));border-radius:5px;background:var(--paper);color:var(--ink);font:700 10px/1.4 system-ui;letter-spacing:.12em;white-space:nowrap}</style></head><body>
+</style><style>#creation-hub-centered #extras-atlas{position:relative}#creation-hub-centered #extras-atlas>.atlas-beta{position:absolute;z-index:1;top:14px;right:14px;display:inline-flex;align-items:center;justify-content:center;min-height:24px;padding:3px 9px;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));border-radius:5px;background:var(--paper);color:var(--ink);font:700 10px/1.4 system-ui;letter-spacing:.12em;white-space:nowrap}</style><style>
+.appearance-actions{justify-content:center;gap:10px;border-top:0;padding-top:0;margin-top:24px}
+.appearance-actions :is(.text-button,.primary-button){min-width:0;min-height:38px;padding:8px 16px;border-radius:9px;font:600 12px/1.5 "Segoe UI",system-ui}
+.appearance-actions .text-button{border:1px solid var(--border);background:var(--paper);color:var(--ink)}
+.appearance-actions .text-button:hover{border-color:var(--accent);background:var(--tint)}
+.settings-language{position:absolute;left:20px;top:16px;display:grid;place-items:center;box-sizing:border-box;width:36px;height:36px;padding:5px;border:0;border-radius:6px;background:transparent;color:var(--ink);cursor:pointer}
+.settings-language:hover{background:transparent;opacity:.8}
+.settings-language svg{display:block;width:26px;height:18px;stroke:none}
+.settings-language:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style><style>
+
+
+
+
+</style><style>
+.dialog-close svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]){min-width:36px;width:36px;height:36px;padding:0;gap:0;background:transparent;border:0;box-shadow:none;backdrop-filter:none}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .theme-hold-label{display:none}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .theme-hold-ring{width:36px;height:36px;border-radius:50%;background:conic-gradient(var(--accent) var(--hold-progress),var(--border-soft) 0);outline:0}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .theme-hold-ring::before{content:"";display:block;position:absolute;inset:2px;border-radius:50%;background:var(--paper)}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .theme-hold-ring::after{display:none}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .hold-icon,.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]).is-complete .hold-icon{color:var(--accent);width:22px;height:22px}
+.theme-hold-feedback:is([data-action="themes"],[data-action="mode"]) .hold-icon svg{width:22px;height:22px}
+</style><style id="settings-window-shape">.themes-dialog{box-sizing:border-box;border-width:2px;border-radius:32px;box-shadow:0 28px 85px #00000032,0 3px 10px #00000010,inset 0 1px 0 #ffffff18}</style></head><body>
 <div id="creation-hub-centered"><main class="hub-product" aria-label="Criações de toybile"><div class="hub-sketches" aria-hidden="true"><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:8%;--y:15%;--size:100px;--turn:-15deg;--delay:0.000s" focusable="false"><path pathLength="1" d="M12 64 83 33"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:29%;--y:6%;--size:74px;--turn:12deg;--delay:0.025s" focusable="false"><path pathLength="1" d="M15 58C19 18 57 12 77 37S61 82 42 68"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:84%;--y:13%;--size:90px;--turn:20deg;--delay:0.050s" focusable="false"><path pathLength="1" d="m22 74 30-55 30 55Z"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:95%;--y:36%;--size:66px;--turn:-12deg;--delay:0.075s" focusable="false"><circle pathLength="1" cx="50" cy="50" r="27"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:14%;--y:45%;--size:138px;--turn:8deg;--delay:0.100s" focusable="false"><path pathLength="1" d="M17 78C78 89 7 8 65 21c22 6 26 28 12 38"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:72%;--y:5%;--size:48px;--turn:-23deg;--delay:0.125s" data-wide focusable="false"><path pathLength="1" d="M18 42h58M46 15v58"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:4%;--y:73%;--size:75px;--turn:17deg;--delay:0.150s" focusable="false"><path pathLength="1" d="m19 20 58 58M33 13l51 51"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:86%;--y:62%;--size:125px;--turn:-22deg;--delay:0.175s" focusable="false"><path pathLength="1" d="M15 68c17-62 45 59 69-28"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:20%;--y:87%;--size:80px;--turn:-18deg;--delay:0.200s" focusable="false"><path pathLength="1" d="m20 75 22-54 37 43Z"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:48%;--y:94%;--size:78px;--turn:28deg;--delay:0.225s" focusable="false"><path pathLength="1" d="M18 62c6-32 46-46 61-13s-33 42-40 15"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:91%;--y:88%;--size:108px;--turn:11deg;--delay:0.250s" focusable="false"><ellipse pathLength="1" cx="50" cy="50" rx="31" ry="28"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:6%;--y:95%;--size:46px;--turn:-24deg;--delay:0.275s" data-wide focusable="false"><path pathLength="1" d="M15 65 74 28"/></svg></div>
 <section class="hub-section" aria-labelledby="sites-title"><h2 id="sites-title">Sites</h2><nav class="hub-grid" aria-label="Sites"><a class="hub-tile cursor-interaction" href="https://toybile.github.io/Logic-Editor/">
         <div class="hub-art hub-logic" aria-hidden="true"><div class="hub-sheet"><span>A</span><span>A → B</span><span class="hub-conclusion">∴ B</span></div><span class="hub-symbol-a">∧</span><span class="hub-symbol-b">¬</span><span class="hub-symbol-c">↔</span></div>
         <div class="hub-tile-body"><span class="hub-tile-heading">Editor de Lógica<svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></span><span class="hub-tile-description">Escreva, organize e exporte argumentos.</span><span class="hub-kind">Editor no navegador</span></div>
       </a></nav></section>
-<section class="hub-section" aria-labelledby="softwares-title"><h2 id="softwares-title">Downloadable Softwares (GitHub)</h2><nav class="hub-grid" aria-label="Downloadable Softwares (GitHub)"><a class="hub-tile cursor-interaction" href="https://github.com/toybile/logisim-evolution" target="_blank" rel="noopener noreferrer">
+<section class="hub-section" aria-labelledby="softwares-title"><h2 id="softwares-title">Programas para baixar (GitHub)</h2><nav class="hub-grid" aria-label="Programas para baixar (GitHub)"><a class="hub-tile cursor-interaction" href="https://github.com/toybile/logisim-evolution" target="_blank" rel="noopener noreferrer">
         <div class="hub-art hub-circuit" aria-hidden="true"><svg viewBox="0 0 340 170" class="hub-diagram"><path d="M45 50H120V68H146M45 120H120V102H146M210 85H295"/><path class="hub-gate" d="M146 52H177A33 33 0 0 1 177 118H146Z"/><circle cx="45" cy="50" r="8"/><circle cx="45" cy="120" r="8"/><circle class="hub-output" cx="295" cy="85" r="8"/><text x="45" y="30">A</text><text x="45" y="153">B</text><text x="295" y="63">A ∧ B</text></svg><span class="hub-circuit-label">0 · 1</span></div>
         <div class="hub-tile-body"><span class="hub-tile-heading">Logisim-evolution<svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></span><span class="hub-tile-description">Sua versão com interface aprimorada.</span><span class="hub-kind"> Projeto no GitHub</span></div>
       </a><a class="hub-tile cursor-interaction" href="https://github.com/toybile/Roblox-Favourites-Cleaner" target="_blank" rel="noopener noreferrer">
@@ -523,10 +546,11 @@ window.PORTFOLIO_EXTRAS = Object.freeze({
 
 </script>  <dialog class="themes-dialog" id="themes-dialog" aria-labelledby="themes-title">
     <div class="dialog-panel">
-      <button class="dialog-close" type="button" data-close-appearance aria-label="Fechar temas e aparência">×</button>
+      <button class="dialog-close" type="button" data-close-appearance aria-label="Fechar configurações"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
       <p class="dialog-eyebrow">DO SEU JEITO</p>
-      <h2 class="dialog-title" id="themes-title">Temas e aparência</h2>
-      <p class="dialog-subtitle">Cores tranquilas para acompanhar a sua leitura.</p>
+      <button class="settings-language" type="button" id="settings-language" aria-label="Mudar para inglês"></button>
+      <h2 class="dialog-title" id="themes-title">Configurações</h2>
+      <p class="dialog-subtitle">Idioma e aparência, do seu jeito.</p>
 
       <fieldset class="appearance-section">
         <legend>Modo de exibição</legend>
@@ -584,8 +608,10 @@ document.body.append(feedback);
 const label=feedback.querySelector('.theme-hold-label'),icon=feedback.querySelector('.hold-icon');
 const live=document.createElement('div');live.className='sr-only';live.setAttribute('role','status');document.body.append(live);
 const icons={
+sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>',
+moon:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>',
 mode:'<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.8-.1-1.6-.3-2.3A7 7 0 0 1 12 3Z"/></svg>',
-themes:'<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="8" cy="16" r="3"/><circle cx="16" cy="16" r="3"/></svg>',
+themes:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 3-.7 2.2-2 .9-2.1-.5-2 3.4 1.5 1.7v2.6L2.7 15l2 3.4 2.1-.5 2 .9.7 2.2h4.9l.7-2.2 2-.9 2.1.5 2-3.4-1.5-1.7v-2.6L21.2 9l-2-3.4-2.1.5-2-.9L14.4 3Z"/><circle cx="12" cy="12" r="3"/></svg>',
 check:'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>'
 };
 function applyAppearance(announce){
@@ -668,8 +694,8 @@ applyAppearance(false);
     feedback.style.setProperty("--hold-x", Math.max(84, Math.min(innerWidth - 84, event.clientX)) + "px");
     feedback.style.setProperty("--hold-y", Math.max(80, Math.min(innerHeight - 8, event.clientY)) + "px");
     feedback.style.setProperty("--hold-progress", "0%");
-    label.textContent = isSecond ? "Temas · 0,5 s" : "0,5 s";
-    icon.innerHTML = icons[active.action];
+    label.textContent = "";
+    icon.innerHTML = isSecond ? icons.themes : (root.dataset.theme === "dark" ? icons.sun : icons.moon);
     feedback.classList.add("is-visible");
     frame = requestAnimationFrame(updateProgress);
     holdTimer = setTimeout(function () {
@@ -682,8 +708,8 @@ applyAppearance(false);
         openThemes();
       } else {
         toggleMode();
-        label.textContent = root.dataset.theme === "dark" ? "Escuro" : "Claro";
-        icon.innerHTML = icons.check;
+        label.textContent = "";
+        icon.innerHTML = root.dataset.theme === "dark" ? icons.moon : icons.sun;
         feedback.classList.add("is-complete");
         hideTimer = setTimeout(hideFeedback, 200);
       }
@@ -759,5 +785,51 @@ applyAppearance(false);
   });
   reduced.addEventListener('change', () => apply(false));
   apply(false);
+})();
+</script><script>
+(function(){
+'use strict';
+const key='portfolio-language-v1',button=document.getElementById('settings-language');
+let language='pt-BR';try{language=localStorage.getItem(key)==='en'?'en':'pt-BR';}catch(_){}
+const flags = {
+  pt: '<svg viewBox="0 0 30 20" aria-hidden="true" style="stroke:none;width:26px;height:18px"><rect width="30" height="20" rx="2" fill="#229e45"/><path d="M15 2 28 10 15 18 2 10Z" fill="#ffdf42"/><circle cx="15" cy="10" r="5" fill="#24459b"/><path d="M10.5 8.5q5-1 9 3" fill="none" stroke="#fff" stroke-width="1"/></svg>',
+  en: '<svg viewBox="0 0 30 20" aria-hidden="true" style="stroke:none;width:26px;height:18px"><rect width="30" height="20" rx="2" fill="#243b79"/><path d="m0 0 30 20M30 0 0 20" stroke="#fff" stroke-width="5"/><path d="m0 0 30 20M30 0 0 20" stroke="#ce3545" stroke-width="2"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="7"/><path d="M15 0v20M0 10h30" stroke="#ce3545" stroke-width="4"/></svg>',
+};
+
+const pairs=[["Configurações", "Settings"], ["Fechar configurações", "Close settings"], ["DO SEU JEITO", "MAKE IT YOURS"], ["Idioma e aparência, do seu jeito.", "Language and appearance, your way."], ["Modo de exibição", "Display mode"], ["Automático", "Automatic"], ["Claro", "Light"], ["Escuro", "Dark"], ["Temas", "Themes"], ["Restaurar padrão", "Restore default"], ["Pronto", "Done"], ["Fundo translúcido", "Translucent background"], ["Luz e cores suaves no fundo e sob os cartões.", "Soft light and colors in the background and beneath the cards."], ["Ativado", "On"], ["Desativado", "Off"], ["O sistema está configurado para reduzir a transparência.", "Your system is set to reduce transparency."], ["Fundo translúcido ativado.", "Translucent background enabled."], ["Fundo translúcido desativado.", "Translucent background disabled."], ["Acompanha o navegador, mantendo a paleta escolhida.", "Follows your browser while keeping your chosen palette."], ["Modo e paleta ficam salvos neste navegador.", "Your mode and palette are saved in this browser."], ["Acompanha automaticamente o tema do navegador.", "Automatically follows your browser theme."], ["Para abrir de novo: toque no fundo e segure o segundo toque por 0,5 s.", "To open settings: tap the background and hold the second tap for 0.5 s."], ["Atalho de teclado:", "Keyboard shortcut:"], ["Configs · 0,5 s", "Settings · 0.5 s"], ["0,5 s", "0.5 s"], ["Índigo", "Indigo"], ["Petróleo e turquesa", "Petroleum and turquoise"], ["Grafite e âmbar", "Graphite and amber"], ["Areia e azul", "Sand and blue"], ["Sálvia e oliva", "Sage and olive"], ["Rosé e vinho", "Rose and wine"], ["Ameixa e lavanda", "Plum and lavender"], ["Sites", "Websites"], ["Programas para baixar (GitHub)", "Downloads (GitHub)"], ["Editor de Lógica", "Logic Editor"], ["Escreva, organize e exporte argumentos.", "Write, organize and export arguments."], ["Editor no navegador", "Browser editor"], ["Sua versão com interface aprimorada.", "Your version with an improved interface."], ["Projeto no GitHub", "GitHub project"], ["Liste e remova experiências dos favoritos.", "List and remove experiences from your favorites."], ["Script Python no GitHub", "Python script on GitHub"], ["Criações de toybile", "toybile’s creations"], ["Abrir outros projetos: três cliques ou Alt + O", "Open other projects: three clicks or Alt + O"], ["Fechar outros projetos", "Close other projects"], ["UM PEQUENO DESVIO", "A SMALL DETOUR"], ["Fora de órbita", "Out of orbit"], ["Guias, mapas e outras curiosidades.", "Guides, maps and other curiosities."], ["Outros projetos", "Other projects"], ["Guia completo", "Complete guide"], ["Ordens de exibição de Steins;Gate e links para assistir.", "Steins;Gate viewing orders and links to watch."], ["Sem spoilers", "Spoiler-free"], ["Atlas de linhas de mundo", "World line atlas"], ["Um mapa dos campos atratores e das linhas de mundo de Steins;Gate.", "A map of the attractor fields and world lines of Steins;Gate."], ["Ainda não publicado", "Not published yet"], ["Contém spoilers", "Contains spoilers"], ["Você encontrou o outro lado do portfólio.", "You found the other side of the portfolio."], ["Mais dois toques…", "Two more taps…"], ["Mais um toque…", "One more tap…"]];
+const toEnglish=new Map(pairs),toPortuguese=new Map(pairs.map(([pt,en])=>[en,pt]));
+function translate(value){
+ const word=value.trim(),map=language==='en'?toEnglish:toPortuguese;
+ let translated=map.get(word);
+ if(translated===undefined){
+  let match;
+  if(language==='en'&&(match=word.match(/^(.+), modo (claro|escuro)\.$/)))translated=(toEnglish.get(match[1])||match[1])+', '+(match[2]==='escuro'?'dark':'light')+' mode.';
+  else if(language!=='en'&&(match=word.match(/^(.+), (light|dark) mode\.$/)))translated=(toPortuguese.get(match[1])||match[1])+', modo '+(match[2]==='dark'?'escuro':'claro')+'.';
+ }
+ return translated===undefined?value:value.replace(word,translated);
+}
+function apply(){
+ document.documentElement.lang=language;
+ document.title=language==='en'?"toybile’s creations":"Criações de toybile";
+ const code=language==='en'?'en':'pt';
+ if(button.dataset.language!==code){button.dataset.language=code;button.innerHTML=flags[code];}
+ const label=language==='en'?'Switch to Portuguese (Brazil)':'Mudar para inglês';
+ if(button.getAttribute('aria-label')!==label)button.setAttribute('aria-label',label);
+ if(button.title!==label)button.title=label;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){
+  const node=walker.currentNode;
+  if(node.parentElement.closest('script,style,svg,input,textarea,code,#settings-language'))continue;
+  const next=translate(node.nodeValue);if(next!==node.nodeValue)node.nodeValue=next;
+ }
+ document.querySelectorAll('[aria-label],[title]').forEach(element=>{
+  if(element===button||element.closest('svg'))return;
+  for(const attr of ['aria-label','title']){const value=element.getAttribute(attr);if(value!==null){const next=translate(value);if(next!==value)element.setAttribute(attr,next);}}
+ });
+}
+button.addEventListener('click',()=>{language=language==='en'?'pt-BR':'en';try{localStorage.setItem(key,language);}catch(_){}apply();});
+document.getElementById('appearance-reset').addEventListener('click',()=>{language='pt-BR';try{localStorage.removeItem(key);}catch(_){}apply();});
+const observer=new MutationObserver(apply);observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label','title']});
+apply();
 })();
 </script></body></html>
