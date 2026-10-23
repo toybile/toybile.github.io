@@ -164,25 +164,22 @@ html{color-scheme:light dark}body{margin:0}a{cursor:pointer}
 @media print {#creation-hub-centered .extras-trigger,#creation-hub-centered .extras-dialog {display:none}}
 
 </style><script data-storage-key="portfolio-appearance-v2">
-(function(){"use strict";const themes=[{"id":"light","name":"Claro original","scheme":"light","canvas":"#ffffff","paper":"#ffffff","ink":"#26292e","quiet":"#727780","edge":"#e9ebef","soft":"#f0f2f5","accent":"#3d526e"},{"id":"dark","name":"Escuro original","scheme":"dark","canvas":"#202124","paper":"#202124","ink":"#e9ebef","quiet":"#9da3ad","edge":"#34363b","soft":"#303238","accent":"#b6c9e1"},{"id":"indigo-light","name":"Índigo claro","scheme":"light","canvas":"#f4f4fd","paper":"#fff","ink":"#23263e","quiet":"#626b86","edge":"#dcdff1","soft":"#eef0fc","accent":"#4c57c9"},{"id":"indigo-dark","name":"Índigo escuro","scheme":"dark","canvas":"#0f1023","paper":"#15172e","ink":"#f3f3fc","quiet":"#b4bad3","edge":"#30344f","soft":"#212540","accent":"#a4b0ff"},{"id":"petroleum","name":"Petróleo e turquesa","scheme":"dark","canvas":"#0b2027","paper":"#132d35","ink":"#edf8f7","quiet":"#a0b9bc","edge":"#294b53","soft":"#1c3d45","accent":"#68d8cc"},{"id":"graphite","name":"Grafite e âmbar","scheme":"dark","canvas":"#18191d","paper":"#24252b","ink":"#f5f0e7","quiet":"#beb7aa","edge":"#424044","soft":"#33302b","accent":"#e8b866"},{"id":"sand","name":"Areia e azul","scheme":"light","canvas":"#f2eadf","paper":"#fffaf2","ink":"#293b50","quiet":"#716d66","edge":"#ded4c5","soft":"#e8edf2","accent":"#416b99"},{"id":"sage","name":"Sálvia e oliva","scheme":"light","canvas":"#edf2e8","paper":"#fbfdf7","ink":"#29382c","quiet":"#657263","edge":"#d4decf","soft":"#e5ecdf","accent":"#55734a"}];
-
-const root=document.documentElement;
-const key=document.currentScript.dataset.storageKey;
-const system=matchMedia('(prefers-color-scheme: dark)');
+(function(){"use strict";
+const families=[{"id":"original","name":"Original","light":{"id":"light","name":"Original","scheme":"light","canvas":"#f3f5f8","paper":"#ffffff","ink":"#26292e","quiet":"#727780","edge":"#e9ebef","soft":"#f0f2f5","accent":"#3d526e","family":"original"},"dark":{"id":"dark","name":"Original","scheme":"dark","canvas":"#16181c","paper":"#202124","ink":"#e9ebef","quiet":"#9da3ad","edge":"#34363b","soft":"#303238","accent":"#b6c9e1","family":"original"}},{"id":"indigo","name":"Índigo","light":{"id":"indigo-light","name":"Índigo","scheme":"light","canvas":"#f4f4fd","paper":"#fff","ink":"#23263e","quiet":"#626b86","edge":"#dcdff1","soft":"#eef0fc","accent":"#4c57c9","family":"indigo"},"dark":{"id":"indigo-dark","name":"Índigo","scheme":"dark","canvas":"#0f1023","paper":"#15172e","ink":"#f3f3fc","quiet":"#b4bad3","edge":"#30344f","soft":"#212540","accent":"#a4b0ff","family":"indigo"}},{"id":"petroleum","name":"Petróleo e turquesa","light":{"id":"petroleum-light","scheme":"light","canvas":"#e8f2f1","paper":"#f8fdfc","ink":"#173c42","quiet":"#4f7075","edge":"#c4dad8","soft":"#dcecea","accent":"#177a73","name":"Petróleo e turquesa","family":"petroleum"},"dark":{"id":"petroleum","name":"Petróleo e turquesa","scheme":"dark","canvas":"#0b2027","paper":"#132d35","ink":"#edf8f7","quiet":"#a0b9bc","edge":"#294b53","soft":"#1c3d45","accent":"#68d8cc","family":"petroleum"}},{"id":"graphite","name":"Grafite e âmbar","light":{"id":"graphite-light","scheme":"light","canvas":"#f2efe9","paper":"#fcfaf5","ink":"#3a3329","quiet":"#736650","edge":"#ddd3c2","soft":"#eee5d4","accent":"#856122","name":"Grafite e âmbar","family":"graphite"},"dark":{"id":"graphite","name":"Grafite e âmbar","scheme":"dark","canvas":"#18191d","paper":"#24252b","ink":"#f5f0e7","quiet":"#beb7aa","edge":"#424044","soft":"#33302b","accent":"#e8b866","family":"graphite"}},{"id":"sand","name":"Areia e azul","light":{"id":"sand","name":"Areia e azul","scheme":"light","canvas":"#f2eadf","paper":"#fffaf2","ink":"#293b50","quiet":"#716d66","edge":"#ded4c5","soft":"#e8edf2","accent":"#416b99","family":"sand"},"dark":{"id":"sand-dark","scheme":"dark","canvas":"#191c23","paper":"#232a34","ink":"#f1e7da","quiet":"#b4b5b9","edge":"#3d4654","soft":"#303a48","accent":"#9dbde1","name":"Areia e azul","family":"sand"}},{"id":"sage","name":"Sálvia e oliva","light":{"id":"sage","name":"Sálvia e oliva","scheme":"light","canvas":"#edf2e8","paper":"#fbfdf7","ink":"#29382c","quiet":"#657263","edge":"#d4decf","soft":"#e5ecdf","accent":"#55734a","family":"sage"},"dark":{"id":"sage-dark","scheme":"dark","canvas":"#151d17","paper":"#202c22","ink":"#edf3e8","quiet":"#b0c0a9","edge":"#384d38","soft":"#2c3c2a","accent":"#accb92","name":"Sálvia e oliva","family":"sage"}},{"id":"rose","name":"Rosé e vinho","light":{"id":"rose-light","scheme":"light","canvas":"#f7eef1","paper":"#fff9fb","ink":"#432b35","quiet":"#816371","edge":"#ead4de","soft":"#f2e2e9","accent":"#a34064","name":"Rosé e vinho","family":"rose"},"dark":{"id":"rose-dark","scheme":"dark","canvas":"#25151d","paper":"#34212b","ink":"#f9edf3","quiet":"#d0abbc","edge":"#59394a","soft":"#482c3b","accent":"#ef9dbd","name":"Rosé e vinho","family":"rose"}},{"id":"plum","name":"Ameixa e lavanda","light":{"id":"plum-light","scheme":"light","canvas":"#f2eef8","paper":"#fcfaff","ink":"#362c48","quiet":"#766485","edge":"#dfd4ed","soft":"#eae2f4","accent":"#79509d","name":"Ameixa e lavanda","family":"plum"},"dark":{"id":"plum-dark","scheme":"dark","canvas":"#1b1527","paper":"#2a2039","ink":"#f4ecfc","quiet":"#bdacd1","edge":"#48355e","soft":"#392b4c","accent":"#c1a0e7","name":"Ameixa e lavanda","family":"plum"}}];
+const themes=families.flatMap(f=>[f.light,f.dark]);
+const root=document.documentElement,key=document.currentScript.dataset.storageKey,system=matchMedia('(prefers-color-scheme: dark)');
 let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}
-const valid=id=>themes.some(t=>t.id===id);
-const state={
- themes,key,system,
- selection:saved.selection==='system'||valid(saved.selection)?saved.selection:'system',
- lastLight:themes.some(t=>t.id===saved.lastLight&&t.scheme==='light')?saved.lastLight:'light',
- lastDark:themes.some(t=>t.id===saved.lastDark&&t.scheme==='dark')?saved.lastDark:'dark',
- resolve(){return this.selection==='system'?(system.matches?this.lastDark:this.lastLight):this.selection;},
- persist(){try{localStorage.setItem(key,JSON.stringify({selection:this.selection,lastLight:this.lastLight,lastDark:this.lastDark}));}catch(_){}},
- apply(){const id=this.resolve(),item=themes.find(t=>t.id===id);root.dataset.appearanceTheme=id;root.dataset.theme=item.scheme;root.style.colorScheme=item.scheme;}
+const oldTheme=themes.find(t=>t.id===(saved.selection==='system'?(system.matches?saved.lastDark:saved.lastLight):saved.selection));
+const family=families.some(f=>f.id===saved.family)?saved.family:(oldTheme?.family||'original');
+const mode=['system','light','dark'].includes(saved.mode)?saved.mode:(saved.selection==='system'?'system':oldTheme?.scheme||'system');
+const state={families,themes,key,system,family,mode,
+ scheme(){return this.mode==='system'?(system.matches?'dark':'light'):this.mode;},
+ resolve(){return families.find(f=>f.id===this.family)[this.scheme()].id;},
+ persist(){try{localStorage.setItem(key,JSON.stringify({family:this.family,mode:this.mode}));}catch(_){}},
+ apply(){const item=themes.find(t=>t.id===this.resolve());root.dataset.appearanceTheme=item.id;root.dataset.themeFamily=this.family;root.dataset.theme=item.scheme;root.style.colorScheme=item.scheme;}
 };
 state.apply();window.SiteAppearance=state;
 })();
-
 </script><meta name="theme-color" content="#ffffff"><style>
 dialog { position: fixed; width: min(620px, calc(100vw - 40px)); max-width: none; max-height: calc(100dvh - 48px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--border); border-radius: 24px; background: var(--paper); color: var(--ink); box-shadow: 0 32px 100px #00000030, 0 1px 0 #ffffff18 inset; overscroll-behavior: contain; }
 dialog::backdrop { background: var(--backdrop); backdrop-filter: blur(7px); animation: backdrop-in .22s var(--ease) both; }
@@ -267,14 +264,22 @@ kbd { font: inherit; font-weight: 650; }
 @media(prefers-reduced-motion:reduce){.theme-option,.mode-option,.theme-hold-feedback,.theme-check,.dialog-close{transition:none}.theme-option:hover{transform:none}}
 
 </style><style>
-:root[data-appearance-theme="light"]{--canvas:#ffffff;--paper:#ffffff;--ink:#26292e;--muted:#727780;--border:#e9ebef;--tint:#f0f2f5;--accent:#3d526e;}
-:root[data-appearance-theme="dark"]{--canvas:#202124;--paper:#202124;--ink:#e9ebef;--muted:#9da3ad;--border:#34363b;--tint:#303238;--accent:#b6c9e1;}
+:root[data-appearance-theme="light"]{--canvas:#f3f5f8;--paper:#ffffff;--ink:#26292e;--muted:#727780;--border:#e9ebef;--tint:#f0f2f5;--accent:#3d526e;}
+:root[data-appearance-theme="dark"]{--canvas:#16181c;--paper:#202124;--ink:#e9ebef;--muted:#9da3ad;--border:#34363b;--tint:#303238;--accent:#b6c9e1;}
 :root[data-appearance-theme="indigo-light"]{--canvas:#f4f4fd;--paper:#fff;--ink:#23263e;--muted:#626b86;--border:#dcdff1;--tint:#eef0fc;--accent:#4c57c9;}
 :root[data-appearance-theme="indigo-dark"]{--canvas:#0f1023;--paper:#15172e;--ink:#f3f3fc;--muted:#b4bad3;--border:#30344f;--tint:#212540;--accent:#a4b0ff;}
+:root[data-appearance-theme="petroleum-light"]{--canvas:#e8f2f1;--paper:#f8fdfc;--ink:#173c42;--muted:#4f7075;--border:#c4dad8;--tint:#dcecea;--accent:#177a73;}
 :root[data-appearance-theme="petroleum"]{--canvas:#0b2027;--paper:#132d35;--ink:#edf8f7;--muted:#a0b9bc;--border:#294b53;--tint:#1c3d45;--accent:#68d8cc;}
+:root[data-appearance-theme="graphite-light"]{--canvas:#f2efe9;--paper:#fcfaf5;--ink:#3a3329;--muted:#736650;--border:#ddd3c2;--tint:#eee5d4;--accent:#856122;}
 :root[data-appearance-theme="graphite"]{--canvas:#18191d;--paper:#24252b;--ink:#f5f0e7;--muted:#beb7aa;--border:#424044;--tint:#33302b;--accent:#e8b866;}
 :root[data-appearance-theme="sand"]{--canvas:#f2eadf;--paper:#fffaf2;--ink:#293b50;--muted:#716d66;--border:#ded4c5;--tint:#e8edf2;--accent:#416b99;}
+:root[data-appearance-theme="sand-dark"]{--canvas:#191c23;--paper:#232a34;--ink:#f1e7da;--muted:#b4b5b9;--border:#3d4654;--tint:#303a48;--accent:#9dbde1;}
 :root[data-appearance-theme="sage"]{--canvas:#edf2e8;--paper:#fbfdf7;--ink:#29382c;--muted:#657263;--border:#d4decf;--tint:#e5ecdf;--accent:#55734a;}
+:root[data-appearance-theme="sage-dark"]{--canvas:#151d17;--paper:#202c22;--ink:#edf3e8;--muted:#b0c0a9;--border:#384d38;--tint:#2c3c2a;--accent:#accb92;}
+:root[data-appearance-theme="rose-light"]{--canvas:#f7eef1;--paper:#fff9fb;--ink:#432b35;--muted:#816371;--border:#ead4de;--tint:#f2e2e9;--accent:#a34064;}
+:root[data-appearance-theme="rose-dark"]{--canvas:#25151d;--paper:#34212b;--ink:#f9edf3;--muted:#d0abbc;--border:#59394a;--tint:#482c3b;--accent:#ef9dbd;}
+:root[data-appearance-theme="plum-light"]{--canvas:#f2eef8;--paper:#fcfaff;--ink:#362c48;--muted:#766485;--border:#dfd4ed;--tint:#eae2f4;--accent:#79509d;}
+:root[data-appearance-theme="plum-dark"]{--canvas:#1b1527;--paper:#2a2039;--ink:#f4ecfc;--muted:#bdacd1;--border:#48355e;--tint:#392b4c;--accent:#c1a0e7;}
 
 :root[data-appearance-theme]{
  --ease:cubic-bezier(.2,0,.38,.9);--ease-out:cubic-bezier(.16,1,.3,1);
@@ -296,9 +301,7 @@ body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
  --hub-art:var(--tint);--hub-sheet:var(--paper);--hub-ink:var(--accent);--hub-shadow:#00000014;
  background:var(--canvas);transition:background-color .28s,color .22s;
 }
-.theme-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-.theme-family{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:10px;min-width:0;}
-.theme-family-title{grid-column:1/-1;margin:0 0 2px;font-size:.70rem;font-weight:650;text-align:center;color:var(--muted);}
+.theme-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
 .theme-option{min-width:0;}.theme-option-name{font-size:.67rem;}
 .theme-preview{height:66px;gap:5px;padding:8px;border-color:var(--preview-edge);background:var(--preview-canvas);}
 .preview-header{height:12px;background:var(--preview-accent);}
@@ -306,7 +309,7 @@ body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
 .preview-row i{background:var(--preview-soft);}
 .preview-row b{background:var(--preview-accent);opacity:.55;}
 .primary-button{color:var(--paper);}
-@media(max-width:480px){.theme-family{grid-template-columns:1fr;}.theme-option-name{font-size:.72rem;}.theme-preview{height:66px;}}
+@media(max-width:480px){.theme-option-name{font-size:.72rem;}.theme-preview{height:66px;}}
 @media(prefers-reduced-motion:reduce){body,#creation-hub-centered .hub-product{transition:none;}}
 
 /* Keep the guide dividers in the active palette; preserve title alignment. */
@@ -317,8 +320,6 @@ body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
 :root[data-appearance-theme]{--index-band:color-mix(in srgb,var(--paper),var(--accent) 24%);--index-ink:color-mix(in srgb,var(--accent),var(--ink) 35%);}
 :root[data-appearance-theme][data-theme="dark"]{--index-ink:var(--accent);}
 .code{background:var(--index-band);color:var(--index-ink);border-right-color:var(--accent);}
-:root[data-appearance-theme="light"]{--canvas:#f3f5f8;}
-:root[data-appearance-theme="dark"]{--canvas:#16181c;}
 #creation-hub-centered .hub-tile{box-shadow:0 4px 18px var(--hub-shadow);}
 
 </style><style>/* Surface preference: opacity applies to the material, never the content. */
@@ -589,35 +590,34 @@ check:'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>'
 };
 function applyAppearance(announce){
  state.apply();
- document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===(state.selection==='system'?'system':root.dataset.theme))));
- grid.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===state.resolve())));
- modeHint.textContent=state.selection==='system'?'Acompanha automaticamente o tema do navegador.':'Sua escolha fica salva neste navegador.';
+ document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===(state.mode))));
+ grid.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===state.family)));
+ modeHint.textContent=state.mode==='system'?'Acompanha o navegador, mantendo a paleta escolhida.':'Modo e paleta ficam salvos neste navegador.';
  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=getComputedStyle(root).getPropertyValue('--canvas').trim();
- if(announce)live.textContent=state.themes.find(t=>t.id===state.resolve()).name+'.';
+ grid.querySelectorAll('[data-theme-choice]').forEach(button=>{
+  const item=state.families.find(f=>f.id===button.dataset.themeChoice)[state.scheme()];
+  button.style.cssText='--preview-canvas:'+item.canvas+';--preview-paper:'+item.paper+';--preview-accent:'+item.accent+';--preview-soft:'+item.soft+';--preview-edge:'+item.edge;
+ });
+ if(announce)live.textContent=state.families.find(f=>f.id===state.family).name+', modo '+(state.scheme()==='dark'?'escuro':'claro')+'.';
 }
 function selectTheme(id){
- const item=state.themes.find(t=>t.id===id);if(!item)return;
- state.selection=id;state[item.scheme==='dark'?'lastDark':'lastLight']=id;state.persist();applyAppearance(true);
+ if(!state.families.some(f=>f.id===id))return;
+ state.family=id;state.persist();applyAppearance(true);
 }
 function setMode(mode){
- state.selection=mode==='system'?'system':(mode==='dark'?state.lastDark:state.lastLight);
- state.persist();applyAppearance(true);
+ if(!['system','light','dark'].includes(mode))return;
+ state.mode=mode;state.persist();applyAppearance(true);
 }
 function toggleMode(){setMode(root.dataset.theme==='dark'?'light':'dark');}
-for(const scheme of ['light','dark']){
- const section=document.createElement('section');section.className='theme-family';section.setAttribute('aria-label',scheme==='dark'?'Temas escuros':'Temas claros');
- const heading=document.createElement('h3');heading.className='theme-family-title';heading.textContent=scheme==='dark'?'Escuros':'Claros';section.append(heading);
- state.themes.filter(t=>t.scheme===scheme).forEach(item=>{
-  const button=document.createElement('button');button.type='button';button.className='theme-option';button.dataset.themeChoice=item.id;button.setAttribute('aria-label',item.name);
-  button.style.cssText='--preview-canvas:'+item.canvas+';--preview-paper:'+item.paper+';--preview-accent:'+item.accent+';--preview-soft:'+item.soft+';--preview-edge:'+item.edge;
-  button.innerHTML='<span class="theme-preview" aria-hidden="true"><span class="preview-header"></span><span class="preview-row"><i></i><b></b></span><span class="preview-row"><i></i><b></b></span></span><span class="theme-option-name">'+item.name+'</span><span class="theme-check" aria-hidden="true">'+icons.check+'</span>';
-  button.addEventListener('click',()=>selectTheme(item.id));section.append(button);
- });grid.append(section);
+for(const family of state.families){
+ const button=document.createElement('button');button.type='button';button.className='theme-option';button.dataset.themeChoice=family.id;button.setAttribute('aria-label',family.name);
+ button.innerHTML='<span class="theme-preview" aria-hidden="true"><span class="preview-header"></span><span class="preview-row"><i></i><b></b></span><span class="preview-row"><i></i><b></b></span></span><span class="theme-option-name">'+family.name+'</span><span class="theme-check" aria-hidden="true">'+icons.check+'</span>';
+ button.addEventListener('click',()=>selectTheme(family.id));grid.append(button);
 }
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 document.getElementById('appearance-reset').addEventListener('click',()=>{
- state.selection='system';state.lastLight='light';state.lastDark='dark';
- try{localStorage.removeItem(state.key);}catch(_){}
+ state.family='original';state.mode='system';
+ state.persist();
  applyAppearance(true);
 });
 dialog.querySelectorAll('[data-close-appearance]').forEach(b=>b.addEventListener('click',()=>window.GuideUI.closeModal(dialog)));
@@ -625,7 +625,7 @@ let backdropPress=false;
 dialog.addEventListener('pointerdown',e=>{backdropPress=e.target===dialog;});
 dialog.addEventListener('click',e=>{if(backdropPress&&e.target===dialog)window.GuideUI.closeModal(dialog);backdropPress=false;});
 function openThemes(){window.GuideUI.openModal(dialog);}
-systemTheme.addEventListener('change',()=>{if(state.selection==='system')applyAppearance(false);});
+systemTheme.addEventListener('change',()=>{if(state.mode==='system')applyAppearance(false);});
 applyAppearance(false);
   // A short tap arms the next hold; a solitary hold always toggles appearance.
   const HOLD_MS = 500, DOUBLE_TAP_MS = 420, MOVE_PX = 14, TAP_DISTANCE = 32;
