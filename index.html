@@ -67,7 +67,296 @@
 html{color-scheme:light dark}body{margin:0}a{cursor:pointer}
 @media(max-width:600px){#creation-hub-centered .hub-product{padding:40px 18px;gap:32px}}
 @media(min-width:601px) and (max-height:700px){#creation-hub-centered .hub-product{padding:16px 24px;gap:18px}#creation-hub-centered .hub-art{height:clamp(80px,16dvh,112px)}#creation-hub-centered .hub-section h2{margin-bottom:10px}#creation-hub-centered .hub-tile-body{padding:14px 18px;gap:6px}#creation-hub-centered .hub-tile-heading{font-size:16px}#creation-hub-centered .hub-kind{margin-top:4px}#creation-hub-centered .hub-sheet,#creation-hub-centered .hub-favourites-list{transform:scale(.7)}#creation-hub-centered .hub-tile:hover .hub-sheet,#creation-hub-centered .hub-tile:hover .hub-favourites-list{transform:scale(.7)}#creation-hub-centered .hub-diagram{height:108px}}
-</style><script>try{const theme=JSON.parse(localStorage.getItem('formal-argument-ui')||'{}').theme;if(theme==='light'||theme==='dark')document.documentElement.style.colorScheme=theme;}catch{}</script></head><body>
+</style><style>
+/* Local addition to the existing portfolio. Inherits its automatic light/dark colors. */
+#creation-hub-centered .extras-trigger {
+  position:fixed;z-index:5;left:50%;bottom:max(12px,env(safe-area-inset-bottom));
+  transform:translateX(-50%);display:grid;place-items:center;
+  width:44px;height:44px;padding:0;border:1px solid transparent;border-radius:50%;
+  background:transparent;color:var(--hub-muted);cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition:background .2s,border-color .2s,color .2s;
+}
+#creation-hub-centered .extras-trigger:hover,
+#creation-hub-centered .extras-trigger[data-step="1"],
+#creation-hub-centered .extras-trigger[data-step="2"] {
+  background:var(--hub-art);border-color:var(--hub-edge);color:var(--hub-ink);
+}
+#creation-hub-centered .extras-trigger:focus-visible,
+#creation-hub-centered .extras-card:focus-visible,
+#creation-hub-centered .extras-close:focus-visible {outline:2px solid var(--hub-ink);outline-offset:4px}
+#creation-hub-centered .extras-dots {display:grid;grid-template-columns:repeat(3,4px);gap:4px}
+#creation-hub-centered .extras-dots i {width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.4;transition:opacity .18s,transform .18s}
+#creation-hub-centered .extras-trigger[data-step="1"] i:first-child,
+#creation-hub-centered .extras-trigger[data-step="2"] i:nth-child(-n+2) {opacity:1;transform:scale(1.3)}
+#creation-hub-centered .extras-feedback {
+  position:absolute;bottom:54px;left:50%;transform:translate(-50%,4px);
+  padding:7px 12px;border:1px solid var(--hub-edge);border-radius:20px;
+  color:var(--hub-ink);background:var(--hub-bg);font:12px/1.5 system-ui;
+  white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity .16s,transform .2s,visibility .2s;
+}
+#creation-hub-centered .extras-trigger[data-step="1"] .extras-feedback,
+#creation-hub-centered .extras-trigger[data-step="2"] .extras-feedback {opacity:1;visibility:visible;transform:translate(-50%,0)}
+#creation-hub-centered .extras-dialog {
+  width:min(716px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 40px);
+  padding:0;margin:auto;overflow:auto;overscroll-behavior:contain;
+  border:1px solid var(--hub-edge);border-radius:22px;
+  background:var(--hub-bg);color:var(--hub-text);
+  box-shadow:0 28px 100px #0003;font:15px/1.5 system-ui;
+}
+#creation-hub-centered .extras-dialog::backdrop {background:light-dark(#19233566,#05070acc);backdrop-filter:blur(7px)}
+#creation-hub-centered .extras-panel {position:relative;padding:38px 28px 24px}
+#creation-hub-centered .extras-close {
+  position:absolute;top:12px;right:12px;display:grid;place-items:center;width:44px;height:44px;
+  padding:12px;border:0;border-radius:50%;color:var(--hub-muted);background:transparent;
+  cursor:pointer;transition:background .18s,color .18s,transform .18s;
+}
+#creation-hub-centered .extras-close:hover {background:var(--hub-art);color:var(--hub-text)}
+#creation-hub-centered .extras-close:active {transform:scale(.92)}
+#creation-hub-centered .extras-close svg,
+#creation-hub-centered .extras-card-title svg {width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+#creation-hub-centered .extras-header {text-align:center;padding:0 28px;margin:0 0 28px}
+#creation-hub-centered .extras-eyebrow {font-size:10px;font-weight:600;letter-spacing:.16em;color:var(--hub-muted)}
+#creation-hub-centered .extras-header h2 {margin:9px 0 10px;font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.035em}
+#creation-hub-centered .extras-header h2:focus {outline:0}
+#creation-hub-centered .extras-header p {margin:0;font-size:14px;color:var(--hub-muted);text-wrap:balance}
+#creation-hub-centered .extras-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#creation-hub-centered .extras-card {
+  min-width:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--hub-edge);
+  border-radius:16px;background:var(--hub-bg);color:var(--hub-text);text-decoration:none;text-align:left;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),box-shadow .24s,border-color .24s;
+}
+#creation-hub-centered .extras-card[href]:hover {transform:translateY(-4px);box-shadow:0 12px 28px var(--hub-shadow);border-color:var(--hub-ink)}
+#creation-hub-centered .extras-card[href]:active {transform:translateY(-1px) scale(.99)}
+#creation-hub-centered .extras-card[aria-disabled="true"] {cursor:default}
+#creation-hub-centered .extras-card[aria-disabled="true"] .extras-card-title svg {display:none}
+#creation-hub-centered .extras-art {height:138px;display:grid;place-items:center;background:var(--hub-art);color:var(--hub-ink);overflow:hidden}
+#creation-hub-centered .extras-art svg {width:100%;height:128px;fill:currentColor;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+#creation-hub-centered .extras-card[href]:hover .extras-art svg {transform:translateY(-2px) rotate(-2deg)}
+#creation-hub-centered .extras-paper {fill:var(--hub-sheet);stroke:var(--hub-edge)}
+#creation-hub-centered .extras-art-line {fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#creation-hub-centered .extras-fine {opacity:.6;stroke-width:2.4}
+#creation-hub-centered .extras-node {fill:var(--hub-sheet);stroke:currentColor;stroke-width:1.7}
+#creation-hub-centered .extras-card-body {display:flex;flex:1;flex-direction:column;gap:10px;padding:20px}
+#creation-hub-centered .extras-card-title {display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:17px;font-weight:500;line-height:1.4;text-wrap:balance}
+#creation-hub-centered .extras-card-title svg {color:var(--hub-muted)}
+#creation-hub-centered .extras-card-description {flex:1;color:var(--hub-muted);font-size:13px;line-height:1.6;text-wrap:pretty}
+#creation-hub-centered .extras-tag {align-self:flex-start;margin-top:6px;padding:4px 9px;border-radius:6px;background:var(--hub-art);color:var(--hub-ink);font-size:11px;line-height:1.5}
+#creation-hub-centered .extras-footnote {margin:22px 0 0;text-align:center;color:var(--hub-muted);font-size:11px}
+@media(max-width:560px) {
+  #creation-hub-centered .extras-dialog {width:calc(100vw - 24px);max-height:calc(100dvh - 24px);border-radius:18px}
+  #creation-hub-centered .extras-panel {padding:40px 18px 22px}
+  #creation-hub-centered .extras-header {padding:0 20px;margin-bottom:22px}
+  #creation-hub-centered .extras-header h2 {font-size:25px}
+  #creation-hub-centered .extras-grid {grid-template-columns:1fr;gap:16px}
+  #creation-hub-centered .extras-art {height:110px}
+  #creation-hub-centered .extras-art svg {height:110px}
+  #creation-hub-centered .extras-card-body {padding:18px}
+  #creation-hub-centered .hub-product {padding-bottom:76px}
+}
+@media(prefers-reduced-motion:reduce) {
+  #creation-hub-centered .extras-trigger,#creation-hub-centered .extras-dots i,
+  #creation-hub-centered .extras-feedback,#creation-hub-centered .extras-close,
+  #creation-hub-centered .extras-card,#creation-hub-centered .extras-art svg {transition:none}
+  #creation-hub-centered .extras-card[href]:hover,#creation-hub-centered .extras-card[href]:hover .extras-art svg {transform:none}
+}
+@media print {#creation-hub-centered .extras-trigger,#creation-hub-centered .extras-dialog {display:none}}
+
+</style><script data-storage-key="portfolio-appearance-v2">
+(function(){"use strict";const themes=[{"id":"light","name":"Claro original","scheme":"light","canvas":"#ffffff","paper":"#ffffff","ink":"#26292e","quiet":"#727780","edge":"#e9ebef","soft":"#f0f2f5","accent":"#3d526e"},{"id":"dark","name":"Escuro original","scheme":"dark","canvas":"#202124","paper":"#202124","ink":"#e9ebef","quiet":"#9da3ad","edge":"#34363b","soft":"#303238","accent":"#b6c9e1"},{"id":"indigo-light","name":"Índigo claro","scheme":"light","canvas":"#f4f4fd","paper":"#fff","ink":"#23263e","quiet":"#626b86","edge":"#dcdff1","soft":"#eef0fc","accent":"#4c57c9"},{"id":"indigo-dark","name":"Índigo escuro","scheme":"dark","canvas":"#0f1023","paper":"#15172e","ink":"#f3f3fc","quiet":"#b4bad3","edge":"#30344f","soft":"#212540","accent":"#a4b0ff"},{"id":"petroleum","name":"Petróleo e turquesa","scheme":"dark","canvas":"#0b2027","paper":"#132d35","ink":"#edf8f7","quiet":"#a0b9bc","edge":"#294b53","soft":"#1c3d45","accent":"#68d8cc"},{"id":"graphite","name":"Grafite e âmbar","scheme":"dark","canvas":"#18191d","paper":"#24252b","ink":"#f5f0e7","quiet":"#beb7aa","edge":"#424044","soft":"#33302b","accent":"#e8b866"},{"id":"sand","name":"Areia e azul","scheme":"light","canvas":"#f2eadf","paper":"#fffaf2","ink":"#293b50","quiet":"#716d66","edge":"#ded4c5","soft":"#e8edf2","accent":"#416b99"},{"id":"sage","name":"Sálvia e oliva","scheme":"light","canvas":"#edf2e8","paper":"#fbfdf7","ink":"#29382c","quiet":"#657263","edge":"#d4decf","soft":"#e5ecdf","accent":"#55734a"}];
+
+const root=document.documentElement;
+const key=document.currentScript.dataset.storageKey;
+const system=matchMedia('(prefers-color-scheme: dark)');
+let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(_){}
+const valid=id=>themes.some(t=>t.id===id);
+const state={
+ themes,key,system,
+ selection:saved.selection==='system'||valid(saved.selection)?saved.selection:'system',
+ lastLight:themes.some(t=>t.id===saved.lastLight&&t.scheme==='light')?saved.lastLight:'light',
+ lastDark:themes.some(t=>t.id===saved.lastDark&&t.scheme==='dark')?saved.lastDark:'dark',
+ resolve(){return this.selection==='system'?(system.matches?this.lastDark:this.lastLight):this.selection;},
+ persist(){try{localStorage.setItem(key,JSON.stringify({selection:this.selection,lastLight:this.lastLight,lastDark:this.lastDark}));}catch(_){}},
+ apply(){const id=this.resolve(),item=themes.find(t=>t.id===id);root.dataset.appearanceTheme=id;root.dataset.theme=item.scheme;root.style.colorScheme=item.scheme;}
+};
+state.apply();window.SiteAppearance=state;
+})();
+
+</script><meta name="theme-color" content="#ffffff"><style>
+dialog { position: fixed; width: min(620px, calc(100vw - 40px)); max-width: none; max-height: calc(100dvh - 48px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--border); border-radius: 24px; background: var(--paper); color: var(--ink); box-shadow: 0 32px 100px #00000030, 0 1px 0 #ffffff18 inset; overscroll-behavior: contain; }
+dialog::backdrop { background: var(--backdrop); backdrop-filter: blur(7px); animation: backdrop-in .22s var(--ease) both; }
+dialog.is-closing::backdrop { animation: backdrop-out .16s var(--ease) both; }
+.dialog-panel { position: relative; padding: 36px 32px 28px; }
+.dialog-close { position: absolute; z-index: 1; top: 16px; right: 16px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid var(--border-soft); border-radius: 50%; background: var(--surface-soft); color: var(--muted); font-size: 1.25rem; line-height: 1; transition: color .18s, background-color .18s, transform .18s; }
+.dialog-close:hover { background: var(--tint); color: var(--accent-ink); transform: rotate(5deg); }
+.dialog-close:active { transform: scale(.94); }
+.dialog-eyebrow { margin: 4px 30px 10px; color: var(--accent-ink); font-size: .64rem; letter-spacing: .12em; line-height: 1.5; font-weight: 750; text-align: center; }
+.dialog-title { margin: 0; padding: 0 20px; color: var(--ink); font-size: clamp(1.4rem, 3vw, 1.85rem); line-height: 1.2; letter-spacing: -.035em; font-weight: 730; text-align: center; text-wrap: balance; }
+.dialog-title:focus { outline: none; }
+.dialog-subtitle { margin: 10px auto 0; max-width: 49ch; color: var(--muted); font-size: .82rem; line-height: 1.6; text-align: center; text-wrap: balance; }
+.availability-note { margin: 24px 0 16px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-soft); color: var(--muted); font-size: .78rem; line-height: 1.65; text-align: center; }
+.availability-note.free { border-color: var(--free-edge); background: var(--free-bg); color: var(--free-ink); }
+.link-list { display: grid; gap: 10px; }
+.watch-link { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 16px; border: 1px solid var(--border); border-radius: 13px; background: var(--surface-row); color: var(--ink); text-decoration: none; transition: transform .18s var(--ease), border-color .18s, background-color .18s, box-shadow .18s; }
+.watch-link:hover { transform: translateY(-2px); border-color: var(--border-hover); background: var(--surface); box-shadow: var(--shadow-hover); }
+.watch-link:active { transform: scale(.994); }
+.watch-link-copy { display: grid; gap: 5px; min-width: 0; }
+.watch-link-title { font-size: .82rem; font-weight: 710; line-height: 1.4; }
+.watch-link-detail { color: var(--muted); font-size: .72rem; line-height: 1.55; }
+.watch-badge { padding: 5px 8px; border-radius: 7px; background: var(--tint); color: var(--accent-ink); font-size: .58rem; line-height: 1.4; font-weight: 750; white-space: nowrap; }
+.watch-badge.free { background: var(--free-bg); color: var(--free-ink); }
+.dialog-footnote { margin: 18px auto 0; max-width: 56ch; color: var(--muted); font-size: .67rem; line-height: 1.65; text-align: center; }
+.themes-dialog { width: min(700px, calc(100vw - 40px)); }
+.themes-dialog .dialog-panel { padding: 36px 32px 24px; }
+.appearance-section { margin: 26px 0 0; padding: 0; border: 0; }
+.appearance-section legend { width: 100%; margin-bottom: 12px; color: var(--ink); font-size: .75rem; font-weight: 710; text-align: center; }
+.mode-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border: 1px solid var(--border-soft); border-radius: 13px; background: var(--surface-soft); }
+.mode-option { display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 42px; padding: 10px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: var(--muted); font-size: .77rem; font-weight: 620; transition: background-color .18s, color .18s, border-color .18s, box-shadow .18s; }
+.mode-option svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mode-option:hover { color: var(--ink); background: var(--tint); }
+.mode-option[aria-pressed="true"] { border-color: var(--border); background: var(--paper); color: var(--accent-ink); box-shadow: 0 2px 6px #00000008; }
+.mode-hint { margin: 10px 0 0; color: var(--muted); font-size: .69rem; line-height: 1.5; text-align: center; }
+.theme-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.theme-option { position: relative; display: grid; gap: 10px; width: 100%; padding: 8px 8px 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: var(--ink); transition: border-color .18s, box-shadow .18s, transform .18s; }
+.theme-option:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: var(--shadow-hover); }
+.theme-option:active { transform: scale(.98); }
+.theme-option[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.theme-option-name { font-size: .72rem; line-height: 1.4; font-weight: 660; text-align: center; }
+.theme-preview { --p-light: 97%; --p-paper: 100%; --p-border: 86%; --p-tint: 90%; display: grid; gap: 6px; height: 88px; padding: 10px; overflow: hidden; border: 1px solid hsl(var(--p-h) 18% var(--p-border)); border-radius: 9px; background: hsl(var(--p-h) var(--p-s) var(--p-light)); }
+:root[data-theme="dark"] .theme-preview { --p-light: 12%; --p-paper: 18%; --p-border: 29%; --p-tint: 29%; }
+.preview-header { display: block; height: 17px; border-radius: 4px; background: hsl(var(--p-a) var(--p-as) 42%); }
+.preview-row { display: grid; grid-template-columns: 15px 1fr; align-items: center; gap: 8px; height: 16px; overflow: hidden; border-radius: 4px; background: hsl(var(--p-h) 18% var(--p-paper)); }
+.preview-row i { align-self: stretch; background: hsl(var(--p-a) 30% var(--p-tint)); }
+.preview-row b { width: 68%; height: 3px; border-radius: 2px; background: hsl(var(--p-a) 23% 59% / .6); }
+.theme-check { position: absolute; top: 13px; right: 13px; display: grid; place-items: center; width: 19px; height: 19px; border: 2px solid var(--surface); border-radius: 50%; background: var(--accent); color: var(--paper); opacity: 0; transform: scale(.7); transition: opacity .16s, transform .2s var(--ease-out); }
+.theme-check svg { width: 11px; height: 11px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.theme-option[aria-pressed="true"] .theme-check { opacity: 1; transform: scale(1); }
+.appearance-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border-soft); }
+.text-button, .primary-button { min-height: 42px; padding: 10px 16px; border: 1px solid transparent; border-radius: 11px; font-size: .75rem; font-weight: 680; transition: background-color .18s, transform .18s; }
+.text-button { padding-inline: 4px; background: transparent; color: var(--muted); }
+.text-button:hover { color: var(--accent-ink); }
+.primary-button { min-width: 108px; background: var(--accent); color: var(--paper); }
+.primary-button:hover { background: var(--accent-hover); }
+.primary-button:active { transform: scale(.97); }
+.gesture-note { margin-top: 18px; color: var(--muted); font-size: .65rem; line-height: 1.6; text-align: center; }
+kbd { font: inherit; font-weight: 650; }
+
+/* Pointer feedback is separate from controls and never intercepts scrolling. */
+.theme-hold-feedback { --hold-progress: 0%; position: fixed; z-index: 10000; left: var(--hold-x, 50%); top: var(--hold-y, 50%); display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 92px; height: 44px; padding: 8px 14px 8px 10px; border: 1px solid var(--border-hover); border-radius: 30px; background: var(--paper); color: var(--accent-ink); box-shadow: 0 8px 28px #0000001c; pointer-events: none; opacity: 0; transform: translate(-50%, calc(-100% - 18px)) scale(.92); transition: opacity .14s ease, transform .2s var(--ease-out), border-color .2s; }
+.theme-hold-feedback.is-visible { opacity: 1; transform: translate(-50%, calc(-100% - 18px)) scale(1); }
+.theme-hold-ring { position: relative; display: grid; place-items: center; width: 24px; height: 24px; flex: none; border-radius: 50%; background: conic-gradient(var(--accent) var(--hold-progress), var(--border-soft) 0); }
+.theme-hold-ring::before { content: ""; position: absolute; inset: 2px; border-radius: 50%; background: var(--paper); }
+.hold-icon { position: relative; z-index: 1; display: grid; place-items: center; }
+.hold-icon svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.theme-hold-label { min-width: 32px; font-size: .69rem; line-height: 1; font-weight: 720; white-space: nowrap; }
+.theme-hold-feedback[data-action="themes"] { min-width: 134px; border-color: var(--accent); }
+.theme-hold-feedback[data-action="themes"] .theme-hold-ring { outline: 1px solid var(--border-hover); outline-offset: 3px; background: conic-gradient(var(--accent) var(--hold-progress), var(--border-soft) 0); }
+.theme-hold-feedback[data-action="themes"] .theme-hold-ring::after { content: ""; position: absolute; inset: 5px; border: 1px solid var(--border); border-radius: 50%; }
+.theme-hold-feedback[data-action="themes"] .hold-icon svg { width: 11px; height: 11px; }
+.theme-hold-feedback.is-complete .theme-hold-ring { background: var(--accent); }
+.theme-hold-feedback.is-complete .theme-hold-ring::before { background: var(--accent); }
+.theme-hold-feedback.is-complete .hold-icon { color: var(--paper); }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes backdrop-out { from { opacity: 1; } to { opacity: 0; } }
+
+@media(max-width:480px){.themes-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);border-radius:20px}.themes-dialog .dialog-panel{padding:36px 18px 22px}.mode-option{gap:6px;font-size:.70rem}.appearance-section{margin-top:22px}}
+*,*::before,*::after{box-sizing:border-box}button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.themes-dialog{font-family:Inter,"Segoe UI",system-ui,sans-serif}.themes-dialog button{color:inherit}.themes-dialog .primary-button{color:var(--paper)}
+@media(prefers-reduced-motion:reduce){.theme-option,.mode-option,.theme-hold-feedback,.theme-check,.dialog-close{transition:none}.theme-option:hover{transform:none}}
+
+</style><style>
+:root[data-appearance-theme="light"]{--canvas:#ffffff;--paper:#ffffff;--ink:#26292e;--muted:#727780;--border:#e9ebef;--tint:#f0f2f5;--accent:#3d526e;}
+:root[data-appearance-theme="dark"]{--canvas:#202124;--paper:#202124;--ink:#e9ebef;--muted:#9da3ad;--border:#34363b;--tint:#303238;--accent:#b6c9e1;}
+:root[data-appearance-theme="indigo-light"]{--canvas:#f4f4fd;--paper:#fff;--ink:#23263e;--muted:#626b86;--border:#dcdff1;--tint:#eef0fc;--accent:#4c57c9;}
+:root[data-appearance-theme="indigo-dark"]{--canvas:#0f1023;--paper:#15172e;--ink:#f3f3fc;--muted:#b4bad3;--border:#30344f;--tint:#212540;--accent:#a4b0ff;}
+:root[data-appearance-theme="petroleum"]{--canvas:#0b2027;--paper:#132d35;--ink:#edf8f7;--muted:#a0b9bc;--border:#294b53;--tint:#1c3d45;--accent:#68d8cc;}
+:root[data-appearance-theme="graphite"]{--canvas:#18191d;--paper:#24252b;--ink:#f5f0e7;--muted:#beb7aa;--border:#424044;--tint:#33302b;--accent:#e8b866;}
+:root[data-appearance-theme="sand"]{--canvas:#f2eadf;--paper:#fffaf2;--ink:#293b50;--muted:#716d66;--border:#ded4c5;--tint:#e8edf2;--accent:#416b99;}
+:root[data-appearance-theme="sage"]{--canvas:#edf2e8;--paper:#fbfdf7;--ink:#29382c;--muted:#657263;--border:#d4decf;--tint:#e5ecdf;--accent:#55734a;}
+
+:root[data-appearance-theme]{
+ --ease:cubic-bezier(.2,0,.38,.9);--ease-out:cubic-bezier(.16,1,.3,1);
+ --surface:var(--paper);--surface-soft:var(--tint);--surface-row:var(--paper);--accent-ink:var(--accent);
+ --accent-hover:color-mix(in srgb,var(--accent),var(--ink) 20%);
+ --tint-strong:color-mix(in srgb,var(--tint),var(--accent) 13%);
+ --border-soft:color-mix(in srgb,var(--paper),var(--border) 75%);
+ --border-hover:color-mix(in srgb,var(--border),var(--accent) 60%);
+ --header-a:color-mix(in srgb,var(--accent),#000 65%);
+ --header-b:color-mix(in srgb,var(--accent),#000 48%);
+ --header-text:#fff;--header-quiet:#ffffffdc;
+ --shadow:0 8px 32px #0000000b,0 1px 3px #00000006;--shadow-hover:0 8px 20px #00000016;--backdrop:#10151b80;
+ font-family:Inter,"Segoe UI",system-ui,sans-serif;background:var(--canvas);color:var(--ink);
+}
+:root[data-appearance-theme][data-theme="dark"]{--shadow:0 8px 32px #00000018;--shadow-hover:0 8px 22px #00000030;--backdrop:#08090ed0;}
+body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
+#creation-hub-centered .hub-product{
+ --hub-bg:var(--paper);--hub-text:var(--ink);--hub-muted:var(--muted);--hub-edge:var(--border);
+ --hub-art:var(--tint);--hub-sheet:var(--paper);--hub-ink:var(--accent);--hub-shadow:#00000014;
+ background:var(--canvas);transition:background-color .28s,color .22s;
+}
+.theme-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.theme-family{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:10px;min-width:0;}
+.theme-family-title{grid-column:1/-1;margin:0 0 2px;font-size:.70rem;font-weight:650;text-align:center;color:var(--muted);}
+.theme-option{min-width:0;}.theme-option-name{font-size:.67rem;}
+.theme-preview{height:66px;gap:5px;padding:8px;border-color:var(--preview-edge);background:var(--preview-canvas);}
+.preview-header{height:12px;background:var(--preview-accent);}
+.preview-row{height:11px;background:var(--preview-paper);}
+.preview-row i{background:var(--preview-soft);}
+.preview-row b{background:var(--preview-accent);opacity:.55;}
+.primary-button{color:var(--paper);}
+@media(max-width:480px){.theme-family{grid-template-columns:1fr;}.theme-option-name{font-size:.72rem;}.theme-preview{height:66px;}}
+@media(prefers-reduced-motion:reduce){body,#creation-hub-centered .hub-product{transition:none;}}
+
+/* Keep the guide dividers in the active palette; preserve title alignment. */
+.code{border-right-color:var(--border-hover);}
+.group-number{visibility:hidden;}
+
+/* Contrast between the index band, its row and the surrounding group. */
+:root[data-appearance-theme]{--index-band:color-mix(in srgb,var(--paper),var(--accent) 24%);--index-ink:color-mix(in srgb,var(--accent),var(--ink) 35%);}
+:root[data-appearance-theme][data-theme="dark"]{--index-ink:var(--accent);}
+.code{background:var(--index-band);color:var(--index-ink);border-right-color:var(--accent);}
+:root[data-appearance-theme="light"]{--canvas:#f3f5f8;}
+:root[data-appearance-theme="dark"]{--canvas:#16181c;}
+#creation-hub-centered .hub-tile{box-shadow:0 4px 18px var(--hub-shadow);}
+
+</style><style>/* Surface preference: opacity applies to the material, never the content. */
+.surface-control {
+  display:flex;align-items:center;gap:16px;width:100%;margin:24px 0 0;padding:16px;
+  border:1px solid var(--border);border-radius:13px;background:var(--surface-soft);
+  color:var(--ink);font:inherit;text-align:left;cursor:pointer;
+  transition:border-color .16s,background-color .16s,box-shadow .16s;
+}
+.surface-copy{display:grid;gap:5px;flex:1;min-width:0}
+.surface-title{font-size:.78rem;font-weight:650;line-height:1.4}
+.surface-description{font-size:.75rem;line-height:1.55;color:var(--muted);text-wrap:pretty}
+.surface-state{font-size:.67rem;color:var(--muted);white-space:nowrap}
+.surface-track{display:block;flex:none;width:36px;height:22px;padding:3px;border:1px solid var(--border-hover);border-radius:20px;background:var(--paper);transition:background .16s,border-color .16s}
+.surface-track>span{display:block;width:14px;height:14px;border-radius:50%;background:var(--muted);transition:transform .18s var(--ease-out),background .16s}
+.surface-control[aria-checked="true"] .surface-track{background:var(--accent);border-color:var(--accent)}
+.surface-control[aria-checked="true"] .surface-track>span{transform:translateX(14px);background:var(--paper)}
+.surface-control[aria-checked="true"] .surface-state{color:var(--accent-ink)}
+@media(hover:hover){.surface-control:not(:disabled):hover{border-color:var(--accent);background:var(--tint)}}
+.surface-control:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.surface-control:active:not(:disabled){box-shadow:0 0 0 2px var(--border-hover) inset}
+.surface-control:disabled{cursor:default}
+:root[data-surface-mode="glass"]{--material:color-mix(in srgb,var(--paper) 90%,transparent);--material-soft:color-mix(in srgb,var(--tint) 94%,transparent)}
+:root[data-surface-mode="glass"] :is(.column,.themes-dialog,.links-dialog){background:var(--material);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+:root[data-surface-mode="glass"] .subsection{background:var(--material-soft)}
+:root[data-surface-mode="glass"] #creation-hub-centered :is(.hub-tile,.extras-dialog){background:var(--material);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+:root[data-surface-mode="glass"] :is(.tile,.journey-entrance,.journey-card,.path-node,.path-choice,.line-summary){background:var(--material)}
+@media(max-width:480px){.surface-control{padding:14px;gap:10px}.surface-state{display:none}}
+@media(prefers-reduced-motion:reduce){.surface-control,.surface-track,.surface-track>span{transition:none}}
+@media(prefers-reduced-transparency:reduce),(forced-colors:active){:root[data-surface-mode="glass"] :is(.column,.themes-dialog,.links-dialog,.subsection,.tile,.journey-entrance,.journey-card,.path-node,.path-choice,.line-summary){background:var(--paper);backdrop-filter:none;-webkit-backdrop-filter:none}:root[data-surface-mode="glass"] #creation-hub-centered :is(.hub-tile,.extras-dialog){background:var(--paper);backdrop-filter:none}}
+</style><style>
+.surface-description{color:color-mix(in srgb,var(--muted) 75%,var(--ink) 25%)}.surface-state,.surface-control[aria-checked="true"] .surface-state{color:var(--ink)}
+</style><style>
+/* The hidden portal retains its 44px hit area and keyboard access. */
+#creation-hub-centered .extras-dots{opacity:0;transition:opacity .18s ease}
+#creation-hub-centered .extras-trigger:is(:hover,:focus-visible,[data-step="1"],[data-step="2"]) .extras-dots{opacity:1}
+@media(prefers-reduced-motion:reduce){#creation-hub-centered .extras-dots{transition:none}}
+</style></head><body>
 <div id="creation-hub-centered"><main class="hub-product" aria-label="Criações de toybile">
 <section class="hub-section" aria-labelledby="sites-title"><h2 id="sites-title">Sites</h2><nav class="hub-grid" aria-label="Sites"><a class="hub-tile cursor-interaction" href="https://toybile.github.io/Logic-Editor/">
         <div class="hub-art hub-logic" aria-hidden="true"><div class="hub-sheet"><span>A</span><span>A → B</span><span class="hub-conclusion">∴ B</span></div><span class="hub-symbol-a">∧</span><span class="hub-symbol-b">¬</span><span class="hub-symbol-c">↔</span></div>
@@ -80,4 +369,383 @@ html{color-scheme:light dark}body{margin:0}a{cursor:pointer}
         <div class="hub-art hub-favourites" aria-hidden="true"><div class="hub-favourites-list"><div><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg><span></span><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></div><div><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg><span></span><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></div><div><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg><span></span><svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></div></div></div>
         <div class="hub-tile-body"><span class="hub-tile-heading">Roblox Favourites Cleaner<svg class="hub-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></span><span class="hub-tile-description">Liste e remova experiências dos favoritos.</span><span class="hub-kind"> Script Python no GitHub</span></div>
       </a></nav></section>
-</main></div></body></html>
+
+<button class="extras-trigger" id="extras-trigger" type="button" aria-label="Abrir outros projetos: três cliques ou Alt + O" aria-haspopup="dialog" aria-controls="extras-dialog" data-step="0">
+  <span class="extras-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="extras-feedback" id="extras-feedback" role="status" aria-live="polite"></span>
+</button>
+<dialog class="extras-dialog" id="extras-dialog" aria-labelledby="extras-title" aria-describedby="extras-description">
+  <div class="extras-panel">
+    <button class="extras-close" id="extras-close" type="button" aria-label="Fechar outros projetos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    <header class="extras-header">
+      <span class="extras-eyebrow">UM PEQUENO DESVIO</span>
+      <h2 id="extras-title" tabindex="-1">Fora de órbita</h2>
+      <p id="extras-description">Guias, mapas e outras curiosidades.</p>
+    </header>
+    <nav class="extras-grid" aria-label="Outros projetos">
+      <a class="extras-card" id="extras-guide" href="https://steins-gate-guia-completo.pastelmaple3.chatgpt.site/" target="_blank" rel="noopener noreferrer">
+        <div class="extras-art extras-art-guide" aria-hidden="true">
+          <svg viewBox="0 0 240 128"><rect x="55" y="20" width="130" height="90" rx="9" class="extras-paper"/><path d="M73 40h94M120 53v41" class="extras-art-line"/><path d="M75 59h29m-29 13h29m-29 13h29m32-26h29m-29 13h29m-29 13h29" class="extras-art-line extras-fine"/><circle cx="73" cy="99" r="2"/><circle cx="167" cy="99" r="2"/></svg>
+        </div>
+        <div class="extras-card-body"><span class="extras-card-title">Guia completo<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+          <span class="extras-card-description">Ordens de exibição de Steins;Gate e links para assistir.</span>
+          <span class="extras-tag">Sem spoilers</span>
+        </div>
+      </a>
+      <a class="extras-card" id="extras-atlas" aria-disabled="true" aria-describedby="extras-atlas-status">
+        <div class="extras-art extras-art-atlas" aria-hidden="true">
+          <svg viewBox="0 0 240 128"><path d="M29 93h37l37-52h38l40 52h30M29 41h38l37 52h37l39-52h31M29 67h182" class="extras-art-line"/><circle cx="67" cy="67" r="6" class="extras-node"/><circle cx="120" cy="41" r="6" class="extras-node"/><circle cx="120" cy="93" r="6" class="extras-node"/><circle cx="180" cy="67" r="6" class="extras-node"/></svg>
+        </div>
+        <div class="extras-card-body"><span class="extras-card-title">Atlas de linhas de mundo<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+          <span class="extras-card-description">Um mapa dos campos atratores e das linhas de mundo de Steins;Gate.</span>
+          <span class="extras-tag" id="extras-atlas-status">Ainda não publicado</span>
+        </div>
+      </a>
+    </nav>
+    <p class="extras-footnote">Você encontrou o outro lado do portfólio.</p>
+  </div>
+</dialog>
+
+</main></div><script>
+// Add the Atlas URL here when it is published. No account or access settings are changed.
+window.PORTFOLIO_EXTRAS = Object.freeze({
+  atlasUrl: "https://steins-gate-atlas.pastelmaple3.chatgpt.site/"
+});
+
+</script><script>
+(function () {
+  'use strict';
+  const trigger = document.getElementById('extras-trigger');
+  const feedback = document.getElementById('extras-feedback');
+  const dialog = document.getElementById('extras-dialog');
+  const closeButton = document.getElementById('extras-close');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let taps = 0, timeout = 0, animation = null, closing = false, previousFocus, previousOverflow;
+
+  // The Atlas has no published URL yet. Set atlasUrl once a real destination exists.
+  const destinations = window.PORTFOLIO_EXTRAS || {};
+  const atlas = document.getElementById('extras-atlas');
+  if (destinations.atlasUrl) {
+    try {
+      const url = new URL(destinations.atlasUrl, document.baseURI);
+      if (!['https:', 'http:'].includes(url.protocol)) throw new Error('Unsupported URL');
+      atlas.href = url.href;
+      atlas.target = '_blank';
+      atlas.rel = 'noopener noreferrer';
+      atlas.removeAttribute('aria-disabled');
+      document.getElementById('extras-atlas-status').textContent = 'Contém spoilers';
+    } catch (_) { /* Keep the unpublished card rather than create a broken link. */ }
+  }
+
+  function reset() {
+    clearTimeout(timeout);
+    taps = 0;
+    trigger.dataset.step = '0';
+  }
+
+  function open() {
+    reset();
+    if (dialog.open) return;
+    animation?.cancel();
+    closing = false;
+    previousFocus = document.activeElement;
+    previousOverflow = document.documentElement.style.overflow;
+    dialog.showModal();
+    document.documentElement.style.overflow = 'hidden';
+    document.getElementById('extras-title').focus({ preventScroll: true });
+    if (!reducedMotion.matches) {
+      animation = dialog.animate([
+        { opacity: 0, transform: 'translateY(10px) scale(.98)' },
+        { opacity: 1, transform: 'translateY(0) scale(1)' }
+      ], { duration: 230, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    }
+  }
+
+  function close() {
+    if (!dialog.open || closing) return;
+    animation?.cancel();
+    closing = true;
+    if (reducedMotion.matches) { dialog.close(); return; }
+    animation = dialog.animate([
+      { opacity: 1, transform: 'translateY(0) scale(1)' },
+      { opacity: 0, transform: 'translateY(6px) scale(.985)' }
+    ], { duration: 150, easing: 'ease-in', fill: 'forwards' });
+    animation.onfinish = function () {
+      dialog.close();
+      animation.cancel();
+      animation = null;
+    };
+  }
+
+  trigger.addEventListener('click', function (event) {
+    if (event.detail === 0) { open(); return; } // Keyboard and assistive activation.
+    clearTimeout(timeout);
+    taps += 1;
+    if (taps >= 3) { open(); return; }
+    feedback.textContent = taps === 1 ? 'Mais dois toques…' : 'Mais um toque…';
+    trigger.dataset.step = String(taps);
+    timeout = setTimeout(reset, 1000);
+  });
+  closeButton.addEventListener('click', close);
+  dialog.addEventListener('cancel', function (event) { event.preventDefault(); close(); });
+  let backdropPress = false;
+  dialog.addEventListener('pointerdown', function (event) { backdropPress = event.target === dialog; });
+  dialog.addEventListener('click', function (event) {
+    if (backdropPress && event.target === dialog) close();
+    backdropPress = false;
+  });
+  dialog.addEventListener('close', function () {
+    closing = false;
+    document.documentElement.style.overflow = previousOverflow;
+    previousFocus?.focus({ preventScroll: true });
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.altKey && !event.ctrlKey && !event.metaKey && event.code === 'KeyO') {
+      event.preventDefault();
+      open();
+    }
+  });
+  window.addEventListener('blur', reset);
+})();
+
+</script>  <dialog class="themes-dialog" id="themes-dialog" aria-labelledby="themes-title">
+    <div class="dialog-panel">
+      <button class="dialog-close" type="button" data-close-appearance aria-label="Fechar temas e aparência">×</button>
+      <p class="dialog-eyebrow">DO SEU JEITO</p>
+      <h2 class="dialog-title" id="themes-title">Temas e aparência</h2>
+      <p class="dialog-subtitle">Cores tranquilas para acompanhar a sua leitura.</p>
+
+      <fieldset class="appearance-section">
+        <legend>Modo de exibição</legend>
+        <div class="mode-options">
+          <button class="mode-option" type="button" data-mode="system" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>Automático</button>
+          <button class="mode-option" type="button" data-mode="light" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>Claro</button>
+          <button class="mode-option" type="button" data-mode="dark" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.8-.1-1.6-.3-2.3A7 7 0 0 1 12 3Z"/></svg>Escuro</button>
+        </div>
+        <p class="mode-hint" id="mode-hint">Acompanha automaticamente o tema do navegador.</p>
+      </fieldset>
+
+      <fieldset class="appearance-section">
+        <legend>Temas</legend>
+        <div class="theme-grid" id="theme-grid"></div>
+      </fieldset>
+      <div class="appearance-actions">
+        <button class="text-button" type="button" id="appearance-reset">Restaurar padrão</button>
+        <button class="primary-button" type="button" data-close-appearance>Pronto</button>
+      </div>
+      <p class="gesture-note">Para abrir de novo: toque no fundo e segure o segundo toque por 0,5 s.<br>Atalho de teclado: <kbd>Alt + T</kbd>.</p>
+    </div>
+  </dialog>
+<script>
+
+(function(){
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)'),dialog=document.getElementById('themes-dialog');
+ let previous,overflow,animation,closing=false;
+ window.GuideUI={
+  openModal(d){
+   if(document.querySelector('dialog[open]'))return;
+   previous=document.activeElement;overflow=document.documentElement.style.overflow;closing=false;
+   d.showModal();document.documentElement.style.overflow='hidden';d.querySelector('.dialog-title').tabIndex=-1;d.querySelector('.dialog-title').focus({preventScroll:true});
+   if(!reduced.matches)animation=d.animate([{opacity:0,transform:'translateY(10px) scale(.98)'},{opacity:1,transform:'none'}],{duration:230,easing:'cubic-bezier(.2,.8,.2,1)'});
+  },
+  closeModal(d){
+   if(!d.open||closing)return;closing=true;animation?.cancel();
+   if(reduced.matches){d.close();return;}
+   animation=d.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(6px) scale(.985)'}],{duration:150,easing:'ease-in',fill:'forwards'});
+   animation.onfinish=()=>{d.close();animation.cancel();};
+  }
+ };
+ dialog.addEventListener('cancel',e=>{e.preventDefault();window.GuideUI.closeModal(dialog);});
+ dialog.addEventListener('close',()=>{closing=false;document.documentElement.style.overflow=overflow;previous?.focus({preventScroll:true});});
+})();
+
+</script><script>
+
+(function(){
+"use strict";
+const state=window.SiteAppearance,root=document.documentElement,systemTheme=state.system;
+const dialog=document.getElementById('themes-dialog'),grid=document.getElementById('theme-grid'),modeHint=document.getElementById('mode-hint');
+const feedback=document.createElement('div');feedback.className='theme-hold-feedback';feedback.setAttribute('aria-hidden','true');
+feedback.innerHTML='<span class="theme-hold-ring"><span class="hold-icon"></span></span><span class="theme-hold-label"></span>';
+document.body.append(feedback);
+const label=feedback.querySelector('.theme-hold-label'),icon=feedback.querySelector('.hold-icon');
+const live=document.createElement('div');live.className='sr-only';live.setAttribute('role','status');document.body.append(live);
+const icons={
+mode:'<svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.8-.1-1.6-.3-2.3A7 7 0 0 1 12 3Z"/></svg>',
+themes:'<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="8" cy="16" r="3"/><circle cx="16" cy="16" r="3"/></svg>',
+check:'<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>'
+};
+function applyAppearance(announce){
+ state.apply();
+ document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===(state.selection==='system'?'system':root.dataset.theme))));
+ grid.querySelectorAll('[data-theme-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeChoice===state.resolve())));
+ modeHint.textContent=state.selection==='system'?'Acompanha automaticamente o tema do navegador.':'Sua escolha fica salva neste navegador.';
+ const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=getComputedStyle(root).getPropertyValue('--canvas').trim();
+ if(announce)live.textContent=state.themes.find(t=>t.id===state.resolve()).name+'.';
+}
+function selectTheme(id){
+ const item=state.themes.find(t=>t.id===id);if(!item)return;
+ state.selection=id;state[item.scheme==='dark'?'lastDark':'lastLight']=id;state.persist();applyAppearance(true);
+}
+function setMode(mode){
+ state.selection=mode==='system'?'system':(mode==='dark'?state.lastDark:state.lastLight);
+ state.persist();applyAppearance(true);
+}
+function toggleMode(){setMode(root.dataset.theme==='dark'?'light':'dark');}
+for(const scheme of ['light','dark']){
+ const section=document.createElement('section');section.className='theme-family';section.setAttribute('aria-label',scheme==='dark'?'Temas escuros':'Temas claros');
+ const heading=document.createElement('h3');heading.className='theme-family-title';heading.textContent=scheme==='dark'?'Escuros':'Claros';section.append(heading);
+ state.themes.filter(t=>t.scheme===scheme).forEach(item=>{
+  const button=document.createElement('button');button.type='button';button.className='theme-option';button.dataset.themeChoice=item.id;button.setAttribute('aria-label',item.name);
+  button.style.cssText='--preview-canvas:'+item.canvas+';--preview-paper:'+item.paper+';--preview-accent:'+item.accent+';--preview-soft:'+item.soft+';--preview-edge:'+item.edge;
+  button.innerHTML='<span class="theme-preview" aria-hidden="true"><span class="preview-header"></span><span class="preview-row"><i></i><b></b></span><span class="preview-row"><i></i><b></b></span></span><span class="theme-option-name">'+item.name+'</span><span class="theme-check" aria-hidden="true">'+icons.check+'</span>';
+  button.addEventListener('click',()=>selectTheme(item.id));section.append(button);
+ });grid.append(section);
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+document.getElementById('appearance-reset').addEventListener('click',()=>{
+ state.selection='system';state.lastLight='light';state.lastDark='dark';
+ try{localStorage.removeItem(state.key);}catch(_){}
+ applyAppearance(true);
+});
+dialog.querySelectorAll('[data-close-appearance]').forEach(b=>b.addEventListener('click',()=>window.GuideUI.closeModal(dialog)));
+let backdropPress=false;
+dialog.addEventListener('pointerdown',e=>{backdropPress=e.target===dialog;});
+dialog.addEventListener('click',e=>{if(backdropPress&&e.target===dialog)window.GuideUI.closeModal(dialog);backdropPress=false;});
+function openThemes(){window.GuideUI.openModal(dialog);}
+systemTheme.addEventListener('change',()=>{if(state.selection==='system')applyAppearance(false);});
+applyAppearance(false);
+  // A short tap arms the next hold; a solitary hold always toggles appearance.
+  const HOLD_MS = 500, DOUBLE_TAP_MS = 420, MOVE_PX = 14, TAP_DISTANCE = 32;
+  let active = null;
+  let lastTap = null;
+  let holdTimer = null;
+  let hideTimer = null;
+  let frame = null;
+  function isBackground(target) {
+    if (!(target instanceof Element) || document.querySelector("dialog[open]")) return false;
+    if (target.closest('button, a, summary, input, textarea, select, dialog, [role="button"], [contenteditable="true"], .column, .hero h1, .hero p, .hub-tile, .hub-section h2, .extras-trigger')) return false;
+    return target === document.body || target === root || Boolean(target.closest(".hero, .columns, .page, .hub-product"));
+  }
+  function hideFeedback() {
+    // Leave label and progress untouched during the opacity transition.
+    feedback.classList.remove("is-visible");
+  }
+  function clearTimers() {
+    clearTimeout(holdTimer); clearTimeout(hideTimer);
+    if (frame !== null) cancelAnimationFrame(frame);
+    frame = null;
+  }
+  function cancelGesture() { clearTimers(); active = null; lastTap = null; hideFeedback(); }
+  function updateProgress(now) {
+    if (!active || active.triggered) return;
+    feedback.style.setProperty("--hold-progress", Math.min(100, (now - active.started) / HOLD_MS * 100) + "%");
+    frame = requestAnimationFrame(updateProgress);
+  }
+  function startHold(event) {
+    if (!event.isPrimary) { cancelGesture(); return; }
+    if (event.button !== 0 || !isBackground(event.target)) { lastTap = null; return; }
+    if (active) cancelGesture();
+    clearTimers();
+    const now = performance.now();
+    const isSecond = lastTap && now - lastTap.at <= DOUBLE_TAP_MS && Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) <= TAP_DISTANCE;
+    active = { id: event.pointerId, x: event.clientX, y: event.clientY, started: now, action: isSecond ? "themes" : "mode", triggered: false };
+    lastTap = null;
+    feedback.dataset.action = active.action;
+    feedback.classList.remove("is-complete");
+    feedback.style.setProperty("--hold-x", Math.max(84, Math.min(innerWidth - 84, event.clientX)) + "px");
+    feedback.style.setProperty("--hold-y", Math.max(80, Math.min(innerHeight - 8, event.clientY)) + "px");
+    feedback.style.setProperty("--hold-progress", "0%");
+    label.textContent = isSecond ? "Temas · 0,5 s" : "0,5 s";
+    icon.innerHTML = icons[active.action];
+    feedback.classList.add("is-visible");
+    frame = requestAnimationFrame(updateProgress);
+    holdTimer = setTimeout(function () {
+      if (!active) return;
+      active.triggered = true;
+      if (frame !== null) cancelAnimationFrame(frame);
+      feedback.style.setProperty("--hold-progress", "100%");
+      if (active.action === "themes") {
+        hideFeedback();
+        openThemes();
+      } else {
+        toggleMode();
+        label.textContent = root.dataset.theme === "dark" ? "Escuro" : "Claro";
+        icon.innerHTML = icons.check;
+        feedback.classList.add("is-complete");
+        hideTimer = setTimeout(hideFeedback, 200);
+      }
+    }, HOLD_MS);
+  }
+  function moveHold(event) {
+    if (!active || event.pointerId !== active.id || active.triggered) return;
+    if (Math.hypot(event.clientX - active.x, event.clientY - active.y) > MOVE_PX) cancelGesture();
+  }
+  function finishHold(event) {
+    if (!active || event.pointerId !== active.id) return;
+    clearTimeout(holdTimer);
+    if (frame !== null) cancelAnimationFrame(frame);
+    if (!active.triggered) {
+      lastTap = active.action === "mode" && performance.now() - active.started < 300
+        ? { at: performance.now(), x: active.x, y: active.y } : null;
+      hideFeedback();
+    }
+    active = null;
+  }
+  document.addEventListener("pointerdown", startHold, { passive: true });
+  document.addEventListener("pointermove", moveHold, { passive: true });
+  document.addEventListener("pointerup", finishHold, { passive: true });
+  document.addEventListener("pointercancel", cancelGesture, { passive: true });
+  window.addEventListener("blur", cancelGesture);
+  document.addEventListener("scroll", function () { if (active && !active.triggered) cancelGesture(); }, { passive: true, capture: true });
+  document.addEventListener("contextmenu", function (event) { if (active) event.preventDefault(); });
+  document.addEventListener("dblclick", function (event) { if (isBackground(event.target)) event.preventDefault(); });
+  document.addEventListener("keydown", function (event) {
+    if (event.altKey && event.key.toLowerCase() === "t" && !event.repeat) { event.preventDefault(); cancelGesture(); openThemes(); }
+  });
+})();
+
+</script><script data-storage-key="portfolio-surface-v1">(function () {
+  'use strict';
+  const root = document.documentElement;
+  const key = document.currentScript?.dataset.storageKey || 'surface-preference-v1';
+  const reduced = matchMedia('(prefers-reduced-transparency: reduce)');
+  let enabled = false;
+  try { enabled = localStorage.getItem(key) === 'glass'; } catch (_) {}
+  const region = document.querySelector('#theme-grid')?.closest('fieldset');
+  if (!region) return;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'surface-control';
+  button.setAttribute('role', 'switch');
+  button.setAttribute('aria-label', 'Fundo translúcido');
+  button.innerHTML = '<span class="surface-copy"><span class="surface-title">Fundo translúcido</span><span class="surface-description">Deixa o fundo aparecer suavemente através dos painéis.</span></span><span class="surface-state"></span><span class="surface-track" aria-hidden="true"><span></span></span>';
+  const status = document.createElement('p');
+  status.className = 'surface-announcement sr-only';
+  status.setAttribute('role', 'status');
+  region.before(button, status);
+  function apply(announce) {
+    const effective = enabled && !reduced.matches;
+    root.dataset.surfaceMode = effective ? 'glass' : 'solid';
+    button.setAttribute('aria-checked', String(effective));
+    button.querySelector('.surface-state').textContent = effective ? 'Ativado' : 'Desativado';
+    button.querySelector('.surface-description').textContent = reduced.matches
+      ? 'O sistema está configurado para reduzir a transparência.'
+      : 'Deixa o fundo aparecer suavemente através dos painéis.';
+    button.disabled = reduced.matches;
+    if (announce) status.textContent = 'Fundo translúcido ' + (effective ? 'ativado.' : 'desativado.');
+  }
+  button.addEventListener('click', function () {
+    enabled = !enabled;
+    try { localStorage.setItem(key, enabled ? 'glass' : 'solid'); } catch (_) {}
+    apply(true);
+  });
+  document.querySelector('#appearance-reset')?.addEventListener('click', function () {
+    enabled = false;
+    try { localStorage.removeItem(key); } catch (_) {}
+    apply(true);
+  });
+  reduced.addEventListener('change', () => apply(false));
+  apply(false);
+})();
+</script></body></html>
