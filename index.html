@@ -341,7 +341,8 @@ body{background:var(--canvas);color:var(--ink);touch-action:manipulation;}
 .surface-control:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .surface-control:active:not(:disabled){box-shadow:0 0 0 2px var(--border-hover) inset}
 .surface-control:disabled{cursor:default}
-:root[data-surface-mode="glass"]{--material:color-mix(in srgb,var(--paper) 90%,transparent);--material-soft:color-mix(in srgb,var(--tint) 94%,transparent)}
+:root[data-surface-mode="glass"]{--material:color-mix(in srgb,var(--paper) 90%,transparent);--material-soft:color-mix(in srgb,var(--tint) 94%,transparent);background:radial-gradient(ellipse 48vw 40vh at 12% 74%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 100%),radial-gradient(ellipse 42vw 46vh at 83% 38%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 100%),var(--canvas);background-attachment:fixed}
+:root[data-surface-mode="glass"] body,:root[data-surface-mode="glass"] #creation-hub-centered .hub-product{background:transparent}
 :root[data-surface-mode="glass"] :is(.column,.themes-dialog,.links-dialog){background:var(--material);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 :root[data-surface-mode="glass"] .subsection{background:var(--material-soft)}
 :root[data-surface-mode="glass"] #creation-hub-centered :is(.hub-tile,.extras-dialog){background:var(--material);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -730,7 +731,7 @@ applyAppearance(false);
   button.className = 'surface-control';
   button.setAttribute('role', 'switch');
   button.setAttribute('aria-label', 'Fundo translúcido');
-  button.innerHTML = '<span class="surface-copy"><span class="surface-title">Fundo translúcido</span><span class="surface-description">Deixa o fundo aparecer suavemente através dos painéis.</span></span><span class="surface-state"></span><span class="surface-track" aria-hidden="true"><span></span></span>';
+  button.innerHTML = '<span class="surface-copy"><span class="surface-title">Fundo translúcido</span><span class="surface-description">Luz e cores suaves no fundo e sob os cartões.</span></span><span class="surface-state"></span><span class="surface-track" aria-hidden="true"><span></span></span>';
   const status = document.createElement('p');
   status.className = 'surface-announcement sr-only';
   status.setAttribute('role', 'status');
@@ -742,7 +743,7 @@ applyAppearance(false);
     button.querySelector('.surface-state').textContent = effective ? 'Ativado' : 'Desativado';
     button.querySelector('.surface-description').textContent = reduced.matches
       ? 'O sistema está configurado para reduzir a transparência.'
-      : 'Deixa o fundo aparecer suavemente através dos painéis.';
+      : 'Luz e cores suaves no fundo e sob os cartões.';
     button.disabled = reduced.matches;
     if (announce) status.textContent = 'Fundo translúcido ' + (effective ? 'ativado.' : 'desativado.');
   }
