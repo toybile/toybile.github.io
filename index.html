@@ -473,7 +473,21 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 @keyframes shift-scene-in{from{opacity:0}to{opacity:1}}
 @keyframes shift-meter-flight{0%{opacity:0;transform:translateZ(120px) rotateX(4deg) rotateY(-4deg) scale(1.08);filter:blur(3px) drop-shadow(0 22px 24px #000)}10%{opacity:0}20%{opacity:1;transform:translateZ(0) rotateX(3deg) rotateY(-3deg) scale(1);filter:blur(0) drop-shadow(0 22px 24px #000)}58%{opacity:1;transform:translateZ(-15px) rotateX(2deg) rotateY(2deg) scale(.98)}70%{opacity:.92}88%{opacity:0;transform:translateZ(-530px) rotateX(0deg) rotateY(6deg) scale(.72)}100%{opacity:0;transform:translateZ(-750px) scale(.6)}}
 @media(prefers-reduced-motion:reduce){.worldline-shift,.worldline-shift::backdrop,.shift-field{animation:none}.shift-meter{animation:none;transform:none}.shift-stage{perspective:none}}
-</style><style>#creation-hub-centered .extras-card-title>svg{opacity:0;transition:opacity .18s ease}#creation-hub-centered .extras-card:hover .extras-card-title>svg{opacity:1}@media(prefers-reduced-motion:reduce){#creation-hub-centered .extras-card-title>svg{transition:none}}</style></head><body><button class="settings-launcher" id="appearance-open" type="button" aria-label="Configurações" title="Configurações" aria-haspopup="dialog" aria-controls="themes-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="m9.5 3-.7 2.2-2 .9-2.1-.5-2 3.4 1.5 1.7v2.6L2.7 15l2 3.4 2.1-.5 2 .9.7 2.2h4.9l.7-2.2 2-.9 2.1.5 2-3.4-1.5-1.7v-2.6L21.2 9l-2-3.4-2.1.5-2-.9L14.4 3Z"/><circle pathLength="1" cx="12" cy="12" r="3"/></svg></button>
+</style><style>#creation-hub-centered .extras-card-title>svg{opacity:0;transition:opacity .18s ease}#creation-hub-centered .extras-card:hover .extras-card-title>svg{opacity:1}@media(prefers-reduced-motion:reduce){#creation-hub-centered .extras-card-title>svg{transition:none}}</style><style>
+/* Shared two-card language chooser; its labels are intentionally untranslated. */
+.site-language-picker{--language-bg:var(--paper,var(--bg,#fff));--language-text:var(--ink,var(--text,#242638));--language-accent:var(--blue,var(--accent,#5055b0));--language-edge:var(--edge,var(--border,#d9dce8));box-sizing:border-box;position:fixed;inset:auto;margin:0;width:min(448px,calc(100vw - 24px));max-width:none;padding:8px;border:1px solid var(--language-edge);border-radius:15px;background:var(--language-bg);color:var(--language-text);box-shadow:0 12px 34px #0002;overflow:visible}
+.site-language-picker:popover-open{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.site-language-picker::backdrop{background:transparent;backdrop-filter:none;animation:none}
+.site-language-picker .site-language-card{box-sizing:border-box;display:flex;align-items:center;justify-content:flex-start;gap:10px;min-width:0;width:auto;min-height:68px;height:auto;padding:11px;border:1px solid var(--language-edge);border-radius:10px;background:var(--language-bg);color:var(--language-text);font:500 12px/1.45 "Segoe UI",system-ui;text-align:left;cursor:pointer;white-space:normal;transition:background .15s,border-color .15s}
+.site-language-picker .site-language-card:hover,.site-language-picker .site-language-card[aria-checked="true"]{border-color:var(--language-accent);background:color-mix(in srgb,var(--language-accent) 12%,var(--language-bg))}
+.site-language-picker .site-language-card:focus-visible{outline:2px solid var(--language-accent);outline-offset:-3px}
+.site-language-picker .site-language-flag{display:grid;place-items:center;flex:none;width:28px;height:20px;line-height:0}
+.site-language-picker .site-language-flag svg{display:block;width:28px;height:20px;fill:none;stroke:none}
+.site-language-picker .site-language-name{min-width:0;overflow-wrap:normal}
+#settings-language>svg{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6}
+#lp-hybrid #editor-settings .hy-settings-actions #settings-language>svg{width:20px;height:20px}
+@media(prefers-reduced-motion:reduce){.site-language-picker .site-language-card{transition:none}}
+</style></head><body><button class="settings-launcher" id="appearance-open" type="button" aria-label="Configurações" title="Configurações" aria-haspopup="dialog" aria-controls="themes-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="m9.5 3-.7 2.2-2 .9-2.1-.5-2 3.4 1.5 1.7v2.6L2.7 15l2 3.4 2.1-.5 2 .9.7 2.2h4.9l.7-2.2 2-.9 2.1.5 2-3.4-1.5-1.7v-2.6L21.2 9l-2-3.4-2.1.5-2-.9L14.4 3Z"/><circle pathLength="1" cx="12" cy="12" r="3"/></svg></button>
 <div id="creation-hub-centered"><main class="hub-product" aria-label="Criações de toybile"><div class="hub-sketches" aria-hidden="true"><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:8%;--y:15%;--size:100px;--turn:-15deg;--delay:0.000s" focusable="false"><path pathLength="1" d="M12 64 83 33"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:29%;--y:6%;--size:74px;--turn:12deg;--delay:0.025s" focusable="false"><path pathLength="1" d="M15 58C19 18 57 12 77 37S61 82 42 68"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:84%;--y:13%;--size:90px;--turn:20deg;--delay:0.050s" focusable="false"><path pathLength="1" d="m22 74 30-55 30 55Z"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:95%;--y:36%;--size:66px;--turn:-12deg;--delay:0.075s" focusable="false"><circle pathLength="1" cx="50" cy="50" r="27"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:14%;--y:45%;--size:138px;--turn:8deg;--delay:0.100s" focusable="false"><path pathLength="1" d="M17 78C78 89 7 8 65 21c22 6 26 28 12 38"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:72%;--y:5%;--size:48px;--turn:-23deg;--delay:0.125s" data-wide focusable="false"><path pathLength="1" d="M18 42h58M46 15v58"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:4%;--y:73%;--size:75px;--turn:17deg;--delay:0.150s" focusable="false"><path pathLength="1" d="m19 20 58 58M33 13l51 51"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:86%;--y:62%;--size:125px;--turn:-22deg;--delay:0.175s" focusable="false"><path pathLength="1" d="M15 68c17-62 45 59 69-28"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:20%;--y:87%;--size:80px;--turn:-18deg;--delay:0.200s" focusable="false"><path pathLength="1" d="m20 75 22-54 37 43Z"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:91%;--y:88%;--size:108px;--turn:11deg;--delay:0.250s" focusable="false"><ellipse pathLength="1" cx="50" cy="50" rx="31" ry="28"/></svg><svg class="hub-sketch" viewBox="0 0 100 100" style="--x:6%;--y:95%;--size:46px;--turn:-24deg;--delay:0.275s" data-wide focusable="false"><path pathLength="1" d="M15 65 74 28"/></svg></div>
 <details open class="hub-section" aria-labelledby="sites-title"><summary class="hub-section-toggle" title="Sites" aria-labelledby="sites-title"><h2 class="hub-section-label" id="sites-title">Sites</h2><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><path d="M2 12h20"/></svg></summary><nav class="hub-grid" aria-label="Sites"><a class="hub-tile cursor-interaction" href="https://toybile.github.io/Logic-Editor/">
         <div class="hub-art hub-logic" aria-hidden="true"><div class="hub-sheet"><span>A</span><span>A → B</span><span class="hub-conclusion">∴ B</span></div><span class="hub-symbol-a">∧</span><span class="hub-symbol-b">¬</span><span class="hub-symbol-c">↔</span></div>
@@ -1010,10 +1024,8 @@ function apply(){
  document.documentElement.lang=language;
  document.title=language==='en'?"toybile’s creations":"Criações de toybile";
  const code=language==='en'?'en':'pt';
- if(button.dataset.language!==code){button.dataset.language=code;button.innerHTML=flags[code];}
- const label=language==='en'?'Switch to Portuguese (Brazil)':'Mudar para inglês';
- if(button.getAttribute('aria-label')!==label)button.setAttribute('aria-label',label);
- if(button.title!==label)button.title=label;
+ languagePicker.refresh();
+
  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
  while(walker.nextNode()){
   const node=walker.currentNode;
@@ -1021,11 +1033,28 @@ function apply(){
   const next=translate(node.nodeValue);if(next!==node.nodeValue)node.nodeValue=next;
  }
  document.querySelectorAll('[aria-label],[title]').forEach(element=>{
-  if(element===button||element.closest('svg'))return;
+  if(element===button||element.closest('svg,[translate=no]'))return;
   for(const attr of ['aria-label','title']){const value=element.getAttribute(attr);if(value!==null){const next=translate(value);if(next!==value)element.setAttribute(attr,next);}}
  });
 }
-button.addEventListener('click',()=>{language=language==='en'?'pt-BR':'en';try{localStorage.setItem(key,language);}catch(_){}apply();});
+function createLanguagePicker(button,flags,getLanguage,setLanguage){
+ const icon='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 2v3M5 5c1 5 4 8 8 10M13 5c-1 5-4 8-8 10m9 6 4-10 4 10m-6.5-4h5"/></svg>';
+ button.innerHTML=icon;button.setAttribute('aria-label','Idioma / Language');button.removeAttribute('title');button.dataset.hintText='Idioma / Language';
+ const picker=document.createElement('div');picker.id='site-language-picker';picker.className='site-language-picker';picker.setAttribute('popover','auto');picker.setAttribute('role','menu');picker.setAttribute('aria-label','Idioma / Language');picker.setAttribute('translate','no');
+ const choices=[['pt-BR','pt','Português Brasileiro (pt-br)'],['en','en','International English (en)']];
+ for(const [code,flag,label] of choices){const option=document.createElement('button');option.type='button';option.className='site-language-card';option.dataset.languageChoice=code;option.setAttribute('role','menuitemradio');option.setAttribute('lang',code);option.innerHTML='<span class="site-language-flag" aria-hidden="true">'+flags[flag]+'</span><span class="site-language-name"></span>';option.lastElementChild.textContent=label;option.addEventListener('click',()=>{if(getLanguage()!==code)setLanguage(code);refresh();picker.hidePopover();button.focus({preventScroll:true});button.dispatchEvent(new Event('languagechange'));});picker.append(option);}
+ const parent=button.closest('dialog,[popover]')||document.body;parent.append(picker);button.setAttribute('popovertarget',picker.id);button.setAttribute('aria-haspopup','menu');button.setAttribute('aria-expanded','false');
+ function refresh(){const code=getLanguage()==='en'?'en':'pt-BR';button.dataset.language=code==='en'?'en':'pt';for(const option of picker.children){const active=option.dataset.languageChoice===code;option.setAttribute('aria-checked',String(active));option.tabIndex=active?0:-1;}}
+ function position(){const anchor=button.getBoundingClientRect(),width=picker.offsetWidth||Math.min(448,innerWidth-24),height=picker.offsetHeight||88;const bounds=parent.getBoundingClientRect(),left=anchor.left+width>Math.min(innerWidth-12,bounds.right-12)?anchor.right-width:anchor.left;picker.style.left=Math.max(12,Math.min(innerWidth-width-12,left))+'px';picker.style.top=Math.max(12,anchor.bottom+8+height<=innerHeight-12?anchor.bottom+8:anchor.top-height-8)+'px';}
+ picker.addEventListener('beforetoggle',event=>{if(event.newState==='open'){refresh();position();}});
+ picker.addEventListener('toggle',event=>{const open=event.newState==='open';button.setAttribute('aria-expanded',String(open));if(open){position();picker.querySelector('[aria-checked="true"]').focus({preventScroll:true});}});
+ picker.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(event.key))return;event.preventDefault();const options=[...picker.children],index=options.indexOf(document.activeElement);options[event.key==='Home'?0:event.key==='End'?1:(index+1)%2].focus();});
+ window.addEventListener('resize',()=>{if(picker.matches(':popover-open'))position();});
+ parent.addEventListener('close',()=>{if(picker.matches(':popover-open'))picker.hidePopover();});parent.addEventListener('toggle',event=>{if(event.target===parent&&event.newState==='closed'&&picker.matches(':popover-open'))picker.hidePopover();});
+ refresh();return{refresh};
+}
+
+const languagePicker=createLanguagePicker(button,flags,()=>language,code=>{language=code;try{localStorage.setItem(key,language);}catch(_){}apply();});
 document.getElementById('appearance-reset').addEventListener('click',()=>{language='pt-BR';try{localStorage.removeItem(key);}catch(_){}apply();});
 const observer=new MutationObserver(records=>{if(records.some(record=>!(record.target.nodeType===Node.ELEMENT_NODE?record.target:record.target.parentElement)?.closest('[translate=no]')))apply();});observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label','title']});
 apply();
