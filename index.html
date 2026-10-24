@@ -660,7 +660,18 @@ applyAppearance(false);
   let holdTimer = null;
   let hideTimer = null;
   let frame = null;
-  function isBackground(target) {
+  function isBackground(target, x, y) {
+    // Empty space inside a heading's layout box is background; its text is not.
+    if (target instanceof Element && target.closest('header,.hub-section h2') && !document.querySelector('dialog[open]') && !target.closest('button,a,summary,input,textarea,select,[role="button"],[contenteditable="true"]')) {
+      const container=target.closest('header,.hub-section h2'),walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT);
+      while(walker.nextNode()) {
+        if(!walker.currentNode.nodeValue.trim())continue;
+        const range=document.createRange();range.selectNodeContents(walker.currentNode);
+        for(const rect of range.getClientRects())if(x>=rect.left&&x<=rect.right&&y>=rect.top&&y<=rect.bottom)return false;
+      }
+      return true;
+    }
+
     if (!(target instanceof Element) || document.querySelector("dialog[open]")) return false;
     if (target.closest('button, a, summary, input, textarea, select, dialog, [role="button"], [contenteditable="true"], .column, .hero h1, .hero p, .hub-tile, .hub-section h2, .extras-trigger')) return false;
     return target === document.body || target === root || Boolean(target.closest(".hero, .columns, .page, .hub-product"));
@@ -682,7 +693,7 @@ applyAppearance(false);
   }
   function startHold(event) {
     if (!event.isPrimary) { cancelGesture(); return; }
-    if (event.button !== 0 || !isBackground(event.target)) { lastTap = null; return; }
+    if (event.button !== 0 || !isBackground(event.target,event.clientX,event.clientY)) { lastTap = null; return; }
     if (active) cancelGesture();
     clearTimers();
     const now = performance.now();
@@ -730,6 +741,10 @@ applyAppearance(false);
     }
     active = null;
   }
+  // Word selection starts on mousedown, before the later dblclick event.
+  document.addEventListener("mousedown", function (event) {
+    if (event.button === 0 && event.detail > 1 && isBackground(event.target,event.clientX,event.clientY)) event.preventDefault();
+  }, true);
   document.addEventListener("pointerdown", startHold, { passive: true });
   document.addEventListener("pointermove", moveHold, { passive: true });
   document.addEventListener("pointerup", finishHold, { passive: true });
@@ -737,7 +752,7 @@ applyAppearance(false);
   window.addEventListener("blur", cancelGesture);
   document.addEventListener("scroll", function () { if (active && !active.triggered) cancelGesture(); }, { passive: true, capture: true });
   document.addEventListener("contextmenu", function (event) { if (active) event.preventDefault(); });
-  document.addEventListener("dblclick", function (event) { if (isBackground(event.target)) event.preventDefault(); });
+  document.addEventListener("dblclick", function (event) { if (isBackground(event.target,event.clientX,event.clientY)) event.preventDefault(); });
   document.addEventListener("keydown", function (event) {
     if (event.altKey && event.key.toLowerCase() === "t" && !event.repeat) { event.preventDefault(); cancelGesture(); openThemes(); }
   });
