@@ -1,0 +1,6 @@
+@media(hover:hover) and (pointer:fine){
+html,body,body :where(*){cursor:url('glove-cursor.svg') 13 2,auto!important}
+html.avatar-gesture-drawing,html.avatar-gesture-drawing body,html.avatar-gesture-drawing body :where(*),body :where(a,button,summary,[role="button"]):active{cursor:url('glove-cursor-pressed.svg') 13 3,pointer!important}
+body input,body textarea,body [contenteditable="true"],body [contenteditable="true"] *{cursor:text!important}
+body button:disabled,body [aria-disabled="true"]{cursor:not-allowed!important}
+}

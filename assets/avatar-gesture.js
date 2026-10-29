@@ -5,6 +5,7 @@
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.classList.add('avatar-gesture-trail');
   svg.setAttribute('aria-hidden', 'true');
+  svg.innerHTML = '<defs><linearGradient id="gesture-prism" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset="0" stop-color="#8debe0"/><stop offset=".5" stop-color="#b6b5f0"/><stop offset="1" stop-color="#eeb7d5"/></linearGradient></defs>';
   document.body.append(svg);
   const avatar = new Image();
   avatar.src = new URL('favicon.svg?v=profile-avatar1', document.currentScript.src).href;
@@ -75,7 +76,12 @@
 
   function paint() {
     frame = 0;
-    if (drawing) drawing.path.setAttribute('d', drawing.points.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
+    if (drawing) {
+      const data = drawing.points.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+      drawing.path.querySelectorAll('.gesture-ribbon').forEach(path => path.setAttribute('d', data));
+      const tip = drawing.points.at(-1);
+      drawing.path.querySelector('.gesture-tip').setAttribute('transform', `translate(${tip.x} ${tip.y})`);
+    }
   }
 
   function finish() {
@@ -95,15 +101,36 @@
   document.addEventListener('pointerdown', event => {
     if (!event.isPrimary || event.button !== 0 || !background(event.target, event.clientX, event.clientY)) return;
     finish();
-    const path = document.createElementNS(svg.namespaceURI, 'path');
+    const path = document.createElementNS(svg.namespaceURI, 'g');
+    path.classList.add('gesture-stroke');
+    path.innerHTML = '<path class="gesture-ribbon gesture-halo"/><path class="gesture-ribbon gesture-color"/><path class="gesture-ribbon gesture-core"/><g class="gesture-tip"><circle class="gesture-tip-ring" r="7"/><circle class="gesture-tip-core" r="2.4"/></g>';
     svg.append(path);
+    path.querySelector('.gesture-tip').setAttribute('transform', `translate(${event.clientX} ${event.clientY})`);
     drawing = { id: event.pointerId, points: [{ x: event.clientX, y: event.clientY }], path, moved: false, recognized: false };
   }, { passive: true });
+  function sparkle(x, y) {
+    if (reduced.matches || svg.querySelectorAll('.gesture-spark').length >= 36) return;
+    const spark = document.createElementNS(svg.namespaceURI, 'g');
+    spark.classList.add('gesture-spark');
+    spark.innerHTML = Math.random() > .45 ? '<path d="M0-4 1.3-1.3 4 0 1.3 1.3 0 4-1.3 1.3-4 0-1.3-1.3Z"/>' : '<path d="M0-3 2 2-2 2Z"/>';
+    svg.append(spark);
+    const angle = Math.random()*Math.PI*2, distance = 12 + Math.random()*18;
+    const flight = spark.animate([
+      { transform: `translate(${x}px,${y}px) rotate(0deg) scale(1)`, opacity: .85 },
+      { transform: `translate(${x+Math.cos(angle)*distance}px,${y+Math.sin(angle)*distance}px) rotate(65deg) scale(.2)`, opacity: 0 }
+    ], { duration: 450 + Math.random()*220, easing: 'ease-out', fill: 'forwards' });
+    flight.onfinish = () => spark.remove();
+  }
   document.addEventListener('pointermove', event => {
     if (!drawing || event.pointerId !== drawing.id) return;
     const last = drawing.points.at(-1);
     if (Math.hypot(last.x - event.clientX, last.y - event.clientY) < 2) return;
     drawing.points.push({ x: event.clientX, y: event.clientY });
+    const origin = drawing.sparkOrigin || drawing.points[0];
+    if (Math.hypot(event.clientX-origin.x,event.clientY-origin.y)>16) {
+      sparkle(event.clientX,event.clientY);
+      drawing.sparkOrigin = { x:event.clientX, y:event.clientY };
+    }
     if (drawing.points.length > 900) drawing.points = drawing.points.filter((_, i) => i % 2 === 0);
     if (!drawing.moved && Math.hypot(event.clientX - drawing.points[0].x, event.clientY - drawing.points[0].y) > 8) {
       drawing.moved = true;
