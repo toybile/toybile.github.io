@@ -24,3 +24,6 @@
 
 #creation-hub-centered #private-portal-dialog.portal-dissolving{opacity:calc(1 - var(--dismiss-progress,0));filter:url(#private-portal-dissolve)}
 #creation-hub-centered #private-portal-dialog.portal-dissolving::backdrop{opacity:calc(1 - var(--dismiss-progress,0))}
+
+#creation-hub-centered .extras-dialog.portal-underlay{position:fixed;inset:0;z-index:2147483000}
+.portal-transition-shade{position:fixed;inset:0;z-index:2147482999;background:light-dark(#19233566,#05070acc);backdrop-filter:blur(7px);pointer-events:none}
