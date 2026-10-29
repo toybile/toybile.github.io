@@ -27,3 +27,5 @@
 
 #creation-hub-centered .extras-dialog.portal-underlay{position:fixed;inset:0;z-index:2147483000}
 .portal-transition-shade{position:fixed;inset:0;z-index:2147482999;background:light-dark(#19233566,#05070acc);backdrop-filter:blur(7px);pointer-events:none}
+
+#creation-hub-centered .extras-dialog.portal-promoted::backdrop{animation:none;opacity:1}
