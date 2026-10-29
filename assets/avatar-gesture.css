@@ -1,0 +1,4 @@
+.avatar-gesture-trail{position:fixed;inset:0;width:100vw;height:100dvh;overflow:visible;pointer-events:none;z-index:2147483001;color:var(--accent,#a18dbb)}
+.avatar-gesture-trail path{fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px currentColor)}
+.avatar-gesture-image{position:fixed;left:50%;top:50%;width:14px;height:14px;max-width:none;border-radius:50%;clip-path:circle(50%);object-fit:cover;pointer-events:none;z-index:2147483002;will-change:transform,opacity;transform:translate(-50%,-50%);opacity:0}
+.avatar-gesture-drawing,.avatar-gesture-drawing *{user-select:none!important;cursor:crosshair}
