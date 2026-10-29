@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página não encontrada · toybile</title>
+<script>
+(() => {
+  const aliases = new Set(['/lp', '/Propositional-Logic-Editor']);
+  const path = location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
+  if (aliases.has(path)) {
+    location.replace('https://toybile.github.io/Logic-Editor/' + location.search + location.hash);
+  }
+})();
+</script>
+<style>
+:root{color-scheme:light dark}body{margin:0;min-height:100vh;display:grid;place-items:center;font:16px/1.6 system-ui,sans-serif;background:light-dark(#f3f5f7,#16191f);color:light-dark(#354253,#dde2e9)}main{padding:32px;text-align:center}h1{font-size:26px}a{color:inherit;text-underline-offset:5px}
+</style>
+<main><h1>Página não encontrada</h1><p>Page not found</p><a href="/">Voltar ao Portfólio / Back to portfolio</a><noscript><p><a href="https://toybile.github.io/Logic-Editor/">Abrir Logic Editor / Open Logic Editor</a></p></noscript></main>
+</html>

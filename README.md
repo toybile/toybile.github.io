@@ -39,7 +39,7 @@ Open the portfolio's `index.html` in a modern browser. No dependencies need to b
 | File | Purpose |
 | --- | --- |
 | `index.html` | Main project menu |
-| `lp/index.html` | Embedded view of the standalone Logic Editor |
+| `404.html` | Missing-page fallback and legacy editor redirects |
 | `.nojekyll` | Static GitHub Pages publishing |
 
 GitHub Pages serves the configured publishing source; in the current main-branch/root setup, pushing the updated distribution updates the website.
@@ -83,7 +83,7 @@ Abra o `index.html` do portfólio em um navegador moderno. Não há dependência
 | Arquivo | Finalidade |
 | --- | --- |
 | `index.html` | Menu principal de projetos |
-| `lp/index.html` | Visualização incorporada do editor independente |
+| `404.html` | Página não encontrada e redirecionamentos antigos do editor |
 | `.nojekyll` | Publicação estática no GitHub Pages |
 
 O GitHub Pages usa a origem configurada para publicação; na configuração atual de raiz da branch main, enviar a distribuição atualizada atualiza o site.
