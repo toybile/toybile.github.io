@@ -5,7 +5,7 @@ const cursorArtwork="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"46\" heig
  function apply(){
   root.dataset.siteCursor=state.mode;
   range?.style.setProperty('--cursor-progress',((state.size-60)/100*100)+'%');
-  const size=46*state.size/100,x=Math.round(46*20/256*state.size/100),y=Math.round(46*20/256*state.size/100);
+  const size=46*state.size/100,x=Math.round(size*56/256),y=Math.round(size*22/256);
   const svg=cursorArtwork.replace('height="46"','height="'+size+'"').replace('width="46"','width="'+size+'"');
   const cursor='url("data:image/svg+xml,'+encodeURIComponent(svg)+'") '+x+' '+y;
   root.style.setProperty('--site-cursor',cursor);root.style.setProperty('--site-cursor-pressed',cursor);

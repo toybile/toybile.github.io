@@ -25,6 +25,8 @@ A central menu for browser projects and downloadable software. / Um menu central
 
 **[Read the complete editor guide](https://github.com/toybile/Propositional-Logic-Editor#readme)** for gestures, shortcuts, examples, formula syntax, limits and persistence behavior. In particular, drag rows directly; use Ctrl+Z for recorded row/panel position changes; proposition descriptions do not participate in validation. The beta validator evaluates propositional formulas, not every symbol in the library or natural-language meanings.
 
+**[Atlas Vestibular](https://toybile.github.io/Atlas-Vestibular/)** is a public dashboard for exploring FUVEST and ENEM cut-off scores, competition and statistics, identifying the sources and limits of each dataset.
+
 ## Downloadable software
 
 - [Logisim-evolution](https://github.com/toybile/logisim-evolution): a version with interface modifications.
@@ -68,6 +70,8 @@ O **Logic Editor** permite escrever e avaliar argumentos proposicionais clássic
 - Inglês/português brasileiro, temas claro/escuro, tamanhos independentes e restauração de padrões com confirmação.
 
 **[Leia o manual completo do editor](https://github.com/toybile/Propositional-Logic-Editor#readme)** para gestos, atalhos, exemplos, sintaxe, limites e armazenamento. Em especial: arraste as linhas diretamente; use Ctrl+Z para mudanças registradas de posição das linhas/painéis; descrições de proposições não participam da validação. O validador beta avalia fórmulas proposicionais, não todos os símbolos da biblioteca ou significados em linguagem natural.
+
+O **[Atlas Vestibular](https://toybile.github.io/Atlas-Vestibular/)** é um painel público para explorar notas de corte, concorrência e estatísticas da FUVEST e do ENEM, com identificação das fontes e dos limites de cada conjunto.
 
 ## Programas para download
 
