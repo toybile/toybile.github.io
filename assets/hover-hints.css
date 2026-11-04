@@ -1,0 +1,143 @@
+/* Copied from Logic Editor (development/src/styles/app.css): same hover hint box. */
+/* refined-hover-hint */
+.lp-decoration-alt-hint {
+  --hint-surface: light-dark(#fff, #242a33);
+  --hint-ink: light-dark(#303743, #e9edf3);
+  --hint-secondary: light-dark(#697483, #b4bfce);
+  --hint-edge: light-dark(#e0e6ed, #444e5b);
+  position: fixed;
+  box-sizing: border-box;
+  max-width: 270px;
+  padding: 13px 15px 14px;
+  border: 1px solid var(--hint-edge);
+  border-radius: 15px;
+  background: var(--hint-surface);
+  color: var(--hint-ink);
+  box-shadow:
+    0 12px 34px light-dark(#26364a1c, #0005),
+    0 2px 6px light-dark(#26364a09, #0002);
+  font: 12px/1.65 system-ui;
+  pointer-events: none;
+  overflow: visible;
+}
+.lp-decoration-alt-hint::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 21px;
+  width: 8px;
+  height: 8px;
+  background: var(--hint-surface);
+  border-left: 1px solid var(--hint-edge);
+  border-bottom: 1px solid var(--hint-edge);
+  transform: rotate(45deg);
+}
+.lp-decoration-alt-hint .lp-hint-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hint-ink);
+}
+.lp-decoration-alt-hint .lp-hint-icon {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  background: color-mix(
+    in srgb,
+    var(--hint-accent, light-dark(#7899bc, #9bb7d2)) 16%,
+    var(--hint-surface)
+  );
+  color: var(--hint-ink);
+  font: 17px/1 system-ui;
+}
+.lp-decoration-alt-hint .lp-hint-body {
+  display: block;
+  color: var(--hint-secondary);
+  font-size: 12px;
+}
+.lp-decoration-alt-hint kbd {
+  display: inline-block;
+  vertical-align: baseline;
+  padding: 0 5px;
+  margin: 0 1px;
+  min-width: 22px;
+  border: 1px solid var(--hint-edge);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--hint-edge) 22%, var(--hint-surface));
+  color: var(--hint-ink);
+  font: 500 11px/1.65 system-ui;
+  text-align: center;
+}
+.lp-decoration-alt-hint:popover-open {
+  animation: lp-hint-enter 0.16s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes lp-hint-enter {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-decoration-alt-hint:popover-open {
+    animation: none;
+  }
+}
+/* unified-hover-hints */
+.lp-unified-hint {
+  max-width: min(310px, calc(100vw - 24px));
+  z-index: 2000;
+}
+.lp-unified-hint .lp-hint-icon svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lp-unified-hint .lp-hint-body {
+  overflow-wrap: anywhere;
+}
+.lp-unified-hint[data-side="bottom"]::before {
+  left: var(--hint-pointer, 20px);
+  top: -5px;
+  transform: rotate(135deg);
+}
+.lp-unified-hint[data-side="top"]::before {
+  left: var(--hint-pointer, 20px);
+  top: auto;
+  bottom: -5px;
+  transform: rotate(-45deg);
+}
+.lp-unified-hint[data-compact="true"] {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.lp-unified-hint[data-compact="true"] .lp-hint-heading {
+  margin-bottom: 0;
+}
+/* hint-action-lines */
+.lp-unified-hint .lp-hint-body,
+.lp-decoration-alt-hint .lp-hint-body {
+  white-space: normal;
+}
+.lp-hint-line {
+  display: block;
+}
+.lp-hint-body > .lp-hint-line + .lp-hint-line {
+  margin-top: 6px;
+}
+.lp-hint-heading .lp-hint-line {
+  display: inline;
+}
