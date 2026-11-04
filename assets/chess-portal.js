@@ -10,12 +10,28 @@ document.querySelector('#creation-hub-centered .hub-product').append(dialog);
 let translatedLanguage=null;
 function translate(){const code=en()?'en':'pt-BR';if(translatedLanguage===code)return;translatedLanguage=code;trigger.setAttribute('aria-label',piece==='queen'?t('Atlas de análise de xadrez: 3 toques','Chess Analysis Atlas: 3 taps'):piece==='knight'?t('Cavalo: clique para promover a rainha e abrir o Atlas','Knight: click to promote to queen and open the Atlas'):t('Peão: clique para promover a cavalo','Pawn: click to promote to knight'));dialog.querySelector('.extras-close').setAttribute('aria-label',t('Fechar','Close'));dialog.querySelector('#chess-portal-eyebrow').textContent=t('Uma posição. Várias possibilidades.','One position. Many possibilities.');dialog.querySelector('#chess-portal-description').textContent=t('Compare 30 ferramentas de revisão, explicação e estudo de partidas.','Compare 30 tools for reviewing, explaining and studying your games.');dialog.querySelector('#chess-portal-tag').textContent=t('Explorar o Atlas','Explore the Atlas');}
 let count=0,timer,previousOverflow='',piece='pawn';
-const artwork=trigger.querySelector('img');
-function promote(next){piece=next;artwork.src='assets/chesscom-neo-'+piece+'.png';trigger.dataset.piece=piece;translatedLanguage=null;translate();}
+let artwork=trigger.querySelector('img');
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+// Preload both promotions so the crossfade never waits for an image download.
+for(const next of ['knight','queen']){const image=new Image();image.src='assets/chesscom-neo-'+next+'.png';}
+function promote(next){
+ piece=next;trigger.dataset.piece=piece;trigger.dataset.step=piece==='knight'?'1':'2';
+ const outgoing=artwork,incoming=outgoing.cloneNode();incoming.src='assets/chesscom-neo-'+piece+'.png';
+ trigger.querySelectorAll('.chess-piece-outgoing').forEach(image=>image.remove());
+ outgoing.getAnimations().forEach(animation=>animation.cancel());outgoing.classList.add('chess-piece-outgoing');
+ incoming.classList.remove('chess-piece-outgoing');trigger.append(incoming);artwork=incoming;
+ dialog.querySelector('.chess-portal-art img').src=incoming.src;
+ translatedLanguage=null;translate();
+ if(reducedMotion.matches){outgoing.remove();return Promise.resolve();}
+ const options={duration:380,easing:'cubic-bezier(.22,.68,.2,1)',fill:'both'};
+ const fadeOut=outgoing.animate([{opacity:1,transform:'translateY(0) rotate(0) scale(1)'},{opacity:0,transform:'translateY(8px) rotate(-9deg) scale(.88)'}],options);
+ const fadeIn=incoming.animate([{opacity:0,transform:'translateY(-10px) rotate(9deg) scale(1.12)'},{opacity:1,transform:'translateY(0) rotate(0) scale(1)'}],options);
+ return Promise.allSettled([fadeOut.finished,fadeIn.finished]).then(()=>{outgoing.remove();fadeOut.cancel();fadeIn.cancel();});
+}
 trigger.dataset.piece='pawn';
 const reset=()=>{count=0;trigger.dataset.step='0';clearTimeout(timer);};
 function open(){if(document.querySelector('dialog[open]'))return;reset();translate();previousOverflow=document.documentElement.style.overflow;dialog.showModal();document.documentElement.style.overflow='hidden';dialog.querySelector('h2').focus({preventScroll:true});}
-trigger.addEventListener('click',e=>{if(piece==='pawn'){promote('knight');return;}if(piece==='knight'){promote('queen');open();return;}if(e.detail===0){open();return;}clearTimeout(timer);count++;trigger.dataset.step=String(count);if(count>=3)open();else timer=setTimeout(reset,1100);});
+trigger.addEventListener('click',e=>{if(piece==='pawn'){promote('knight');return;}if(piece==='knight'){promote('queen').then(open);return;}if(e.detail===0){open();return;}clearTimeout(timer);count++;trigger.dataset.step=String(count);if(count>=3)open();else timer=setTimeout(reset,1100);});
 trigger.addEventListener('dblclick',e=>e.preventDefault());window.addEventListener('blur',reset);dialog.querySelector('.extras-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>{document.documentElement.style.overflow=previousOverflow;trigger.focus({preventScroll:true});});dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();});
 new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});translate();
 })();

@@ -1,0 +1,9 @@
+.themes-dialog{overflow:hidden;}
+.themes-dialog .dialog-panel{box-sizing:border-box;max-height:calc(100dvh - 52px);overflow:auto;overscroll-behavior:contain;border-radius:inherit;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink) 22%,transparent) transparent;scrollbar-gutter:stable;}
+.themes-dialog .dialog-panel:hover{scrollbar-color:color-mix(in srgb,var(--ink) 38%,transparent) transparent;}
+.themes-dialog .dialog-panel::-webkit-scrollbar{width:8px;height:8px;}
+.themes-dialog .dialog-panel::-webkit-scrollbar-track{background:transparent;margin-block:24px;}
+.themes-dialog .dialog-panel::-webkit-scrollbar-thumb{background:color-mix(in srgb,var(--ink) 22%,transparent);border:2px solid transparent;background-clip:padding-box;border-radius:99px;}
+.themes-dialog .dialog-panel:hover::-webkit-scrollbar-thumb{background-color:color-mix(in srgb,var(--ink) 38%,transparent);}
+@media(max-width:480px){.themes-dialog .dialog-panel{max-height:calc(100dvh - 28px);}}
+@media(forced-colors:active){.themes-dialog .dialog-panel{scrollbar-color:auto;}}
