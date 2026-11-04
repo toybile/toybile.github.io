@@ -21,10 +21,12 @@
       "rms": 0.0515
     },
     {
-      "name": "worldline-touch",
-      "duration": 0.32,
-      "peak": 0.6085,
-      "rms": 0.1001
+      "name": "worldline-touch-soft",
+      "duration": 0.46,
+      "peak": 0.16,
+      "rms": 0.0285,
+      "playbackVolume": 0.25,
+      "design": "Unpitched, band-limited wind with smooth attack and release"
     }
   ],
   "preservedRecording": {
