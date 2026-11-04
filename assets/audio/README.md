@@ -1,6 +1,11 @@
 # Portfolio sound effects
 
-Seven original synthesized WAV effects for the portal interactions. Initial Steins;Gate touches have a short wind effect. The Steins;Gate animation keeps its original recording, byte-for-byte, in worldline-original.mp3. The existing urna-confirmacao.mp3 remains the voting confirmation. Chess movement and impacts emphasize low wooden resonances. Sounds start after interaction and can be muted in Settings or during a transition.
+Chess uses the original Chess.com default recordings, downloaded from the official asset host:
 
-Chess king artwork uses the same Chess.com Neo set as the existing pieces: https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bk.png
-The hand, board, animation and additional effects are original artwork/code.
+- Movement: https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3
+- Capture: https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3
+
+The Steins;Gate animation recording is preserved byte-for-byte in worldline-original.mp3. A separately synthesized wind effect plays only on the first two touches. Urn keypad and private-unlock effects are synthesized; the existing urna-confirmacao.mp3 remains the voting confirmation. All playback follows interaction and can be muted.
+
+Chess king artwork: https://images.chesscomfiles.com/chess-themes/pieces/neo/150/bk.png
+The hand, chessboard and animation are original code-native artwork.

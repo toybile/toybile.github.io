@@ -5,7 +5,7 @@
   const en=document.documentElement.lang.startsWith('en'),scene=document.createElement('dialog');scene.className='chess-capture-scene';scene.setAttribute('aria-label',en?'A chess piece knocks over the opposing king. Click or press Escape to skip.':'Uma peça derruba o rei adversário. Clique ou pressione Escape para pular.');
   scene.innerHTML='<div class="chess-capture-stage" aria-hidden="true"><div class="chess-scene-board"></div><div class="chess-scene-shadow"></div><div class="chess-scene-mover"><img class="chess-scene-piece" src="assets/chesscom-neo-queen.png" alt="">'+hand+'</div><div class="chess-scene-king"><img class="chess-scene-piece" src="assets/chesscom-neo-black-king.png" alt=""></div><span class="chess-scene-caption">'+(en?'One move. A different outcome.':'Um movimento. Outro desfecho.')+'</span></div>';
   document.body.append(scene);scene.showModal();document.documentElement.style.overflow='hidden';
-  const unbind=window.PortfolioAudio?.bind(scene),stopSound=window.PortfolioAudio?.sequence([{name:'lift',delay:.32,volume:.7},{name:'move',delay:1.64,volume:.62},{name:'fall',delay:2.23,volume:.70}]);
+  const unbind=window.PortfolioAudio?.bind(scene),stopSound=window.PortfolioAudio?.sequence([{name:'move',delay:1.64,volume:.62},{name:'fall',delay:2.23,volume:.70}]);
   let done=false,staged=false,fade;
   const stage=()=>{if(staged)return;staged=true;reveal();};
   const finish=()=>{if(done)return;done=true;clearTimeout(stageTimer);clearTimeout(endTimer);fade?.cancel();stopSound?.();stage();window.PortfolioTransitions.promote(target);scene.close();scene.remove();unbind?.();onFinish();};

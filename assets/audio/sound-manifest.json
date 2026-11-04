@@ -3,24 +3,6 @@
   "origin": "Original synthesized effects; original Steins;Gate animation recording is preserved separately",
   "tracks": [
     {
-      "name": "chess-move",
-      "duration": 0.25,
-      "peak": 0.7954,
-      "rms": 0.1741
-    },
-    {
-      "name": "chess-lift",
-      "duration": 0.24,
-      "peak": 0.207,
-      "rms": 0.0691
-    },
-    {
-      "name": "chess-king-fall",
-      "duration": 0.68,
-      "peak": 0.745,
-      "rms": 0.1236
-    },
-    {
       "name": "urn-keypad",
       "duration": 0.6,
       "peak": 0.3123,
@@ -49,5 +31,17 @@
     "name": "worldline-original.mp3",
     "sha256": "902bc71c97beacbcc4145854fe05db3224da531827214f9870a916286b93483a",
     "origin": "Existing Portfolio animation recording, byte-for-byte"
-  }
+  },
+  "chesscomSounds": [
+    {
+      "file": "chesscom-move-self.mp3",
+      "source": "https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3",
+      "sha256": "3a2eb75af1334c06dafd735c23388a560285e0df9436a44d27adc95a010a8547"
+    },
+    {
+      "file": "chesscom-capture.mp3",
+      "source": "https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3",
+      "sha256": "7158a77f3eb9a763fe723e9c9291819de8748444a1192d10383159fd8175709b"
+    }
+  ]
 }
