@@ -22,5 +22,5 @@
  const setting=document.createElement('button');setting.type='button';setting.className='surface-control portal-audio-setting';setting.setAttribute('role','switch');setting.setAttribute('translate','no');setting.innerHTML='<span class="surface-copy"><strong class="surface-title"></strong><small class="surface-description"></small></span><span class="portal-audio-state surface-state"></span><span class="surface-track" aria-hidden="true"><span></span></span>';setting.onclick=()=>setMuted(!muted);document.querySelector('#cursor-settings')?.before(setting);buttons.add(setting);
  document.querySelector('#appearance-reset')?.addEventListener('click',()=>setMuted(false));
  new MutationObserver(refresh).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
- window.PortfolioAudio={play,sequence,bind,get muted(){return muted;}};refresh();
+ window.PortfolioAudio={play,sequence,bind,mountSettings:root=>root.querySelector('#cursor-settings')?.before(setting),resetSettings:()=>setMuted(false),get muted(){return muted;}};refresh();
 })();
