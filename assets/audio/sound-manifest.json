@@ -19,14 +19,6 @@
       "duration": 0.5,
       "peak": 0.2736,
       "rms": 0.0515
-    },
-    {
-      "name": "worldline-touch-soft",
-      "duration": 0.46,
-      "peak": 0.16,
-      "rms": 0.0285,
-      "playbackVolume": 0.25,
-      "design": "Unpitched, band-limited wind with smooth attack and release"
     }
   ],
   "preservedRecording": {
@@ -45,5 +37,13 @@
       "source": "https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3",
       "sha256": "7158a77f3eb9a763fe723e9c9291819de8748444a1192d10383159fd8175709b"
     }
-  ]
+  ],
+  "phonewaveButton": {
+    "file": "phonewave-button-beep.wav",
+    "source": "https://www.youtube.com/watch?v=VbQfQ6UQSwk",
+    "sourceStartSeconds": 85.665,
+    "sourceEndSeconds": 85.79,
+    "attribution": "Kaito Cross PhoneWave replica demonstration; author describes button effects as taken from the anime",
+    "processing": "Band-limited to isolate button beep from recording ambience; 4 ms edge fades; peak 0.18; playback gain 0.20"
+  }
 }

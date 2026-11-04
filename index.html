@@ -618,7 +618,7 @@ window.PORTFOLIO_EXTRAS = Object.freeze({
 
 
   let shiftActive=false;
-  // Original animation recording preserved byte-for-byte. Wind belongs only to initial touches.
+  // Original animation recording preserved byte-for-byte. Button beeps belong only to initial touches.
   function playShiftAudio(){return window.PortfolioAudio.play('shiftOriginal',{volume:.4});}
   // Perspective projection of equation ribbons on a cylindrical world-line tunnel.
   function createShiftField(canvas,reduced){
@@ -717,7 +717,7 @@ window.PORTFOLIO_EXTRAS = Object.freeze({
   }
 
   trigger.addEventListener('click', function (event) {
-    if(event.detail!==0&&taps<2)window.PortfolioAudio?.play('vortexTouch',{volume:.25});
+    if(event.detail!==0&&taps<2)window.PortfolioAudio?.play('phonewaveTap',{volume:.20});
     if (event.detail === 0) { open(); return; } // Keyboard and assistive activation.
     clearTimeout(timeout);
     taps += 1;
@@ -997,4 +997,4 @@ apply();
  }
 })();
 </script>
-<script src="assets/portal-audio.js?v=soft-wind2"></script><script src="assets/chess-scene.js?v=chesscom-sound3"></script><script src="assets/hidden-portals.js?v=portal-sound2"></script><script src="assets/avatar-gesture.js?v=prism1"></script><script src="assets/cursor-settings.js?v=default-system2"></script><script src="assets/chess-portal.js?v=chess-rook5"></script><script src="assets/default-configurations/host.js?v=shared1" data-site="portfolio" defer></script><script src="assets/default-configurations/panel.js?v=section-tone2" defer></script></body></html>
+<script src="assets/portal-audio.js?v=phonewave-beep1"></script><script src="assets/chess-scene.js?v=chesscom-sound3"></script><script src="assets/hidden-portals.js?v=portal-sound2"></script><script src="assets/avatar-gesture.js?v=prism1"></script><script src="assets/cursor-settings.js?v=default-system2"></script><script src="assets/chess-portal.js?v=chess-rook5"></script><script src="assets/default-configurations/host.js?v=shared1" data-site="portfolio" defer></script><script src="assets/default-configurations/panel.js?v=section-tone2" defer></script></body></html>

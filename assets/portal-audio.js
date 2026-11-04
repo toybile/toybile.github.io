@@ -3,7 +3,7 @@
  'use strict';
  const key='portfolio-sound-v1',active=new Set(),buttons=new Set(),soundPanes=new Set();let muted=false;
  try{muted=localStorage.getItem(key)==='muted';}catch{}
- const sources={move:'audio/chesscom-move-self.mp3',fall:'audio/chesscom-capture.mp3',urnKeys:'audio/urn-keypad.wav',urnConfirm:'urna-confirmacao.mp3',vortexTouch:'audio/worldline-touch-soft.wav',shiftOriginal:'audio/worldline-original.mp3',urnTap:'audio/urn-tap.wav',unlock:'audio/private-unlock.wav'};
+ const sources={move:'audio/chesscom-move-self.mp3',fall:'audio/chesscom-capture.mp3',urnKeys:'audio/urn-keypad.wav',urnConfirm:'urna-confirmacao.mp3',phonewaveTap:'audio/phonewave-button-beep.wav',shiftOriginal:'audio/worldline-original.mp3',urnTap:'audio/urn-tap.wav',unlock:'audio/private-unlock.wav'};
  const base=new URL('.',document.currentScript.src),cached={};
  for(const[name,path]of Object.entries(sources)){const sound=new Audio(new URL(path,base));sound.preload='auto';cached[name]=sound;}
  function play(name,{delay=0,volume=.55}={}){
